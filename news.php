@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <title>Actualités</title>
-    <link rel="stylesheet" href="/styles/news_style.css">
+    <link rel="stylesheet" href="styles/news_style.css">
 
     <link rel="stylesheet" href="styles/general_style.css">
     <link rel="stylesheet" href="styles/header_style.css">
