@@ -39,7 +39,7 @@
                             </form>
                         </li>
                         <li>
-                            <button id="cancelDelete" onclick="window.location.href='/account.php'">Revenir en arrière</button>
+                            <button id="cancelDelete" onclick="window.location.href='account.php'">Revenir en arrière</button>
                         </li>
                     </ul>
                 </div>
