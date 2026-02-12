@@ -21,7 +21,7 @@ class DB
 
     public function query($sql, $types = "", $args = [])
     {
-        // types est un string qui contient les types des arguments
+        // types est  un string qui contient les types des arguments
         // Par ex : "ssds" signifie que les 4 arguments sont de type string, string, decimal, string
         $conn = $this->connect();
 
