@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
                 [$eventid, $show]
             );
             foreach ($medias as $media => $img): ?>
-                <img src="/api/files/<?php echo trim($img['url_media']); ?>" alt="Image de l'événement">
+                <img src="api/files/<?php echo trim($img['url_media']); ?>" alt="Image de l'événement">
             <?php endforeach; ?>
 
 

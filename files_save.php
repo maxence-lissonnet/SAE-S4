@@ -15,7 +15,7 @@ function saveFile(): string | null
 
     $name = generateUUID() . '.' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-    if (move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . '/api/files/' . $name)) {
+    if (move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . 'api/files/' . $name)) {
         return $name;
     }
 
