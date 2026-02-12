@@ -9,7 +9,7 @@ $isAdmin = isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'];
 
 <!-- HEADER -->
 <header>
-    <a id="accueil" href="/index.php">
+    <a id="accueil" href="index.php">
         <img src="assets/logo.png" alt="Logo de l'ADIIL">
     </a>
     <nav>

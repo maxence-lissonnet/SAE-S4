@@ -113,7 +113,7 @@
                         <?php foreach ($products as $product) : ?>
                             <tr>
                                 <td id='article-cell'>
-                                    <img src="/api/files/<?php echo $product['image_article']; ?>" alt="Image de l'article" />
+                                    <img src="api/files/<?php echo $product['image_article']; ?>" alt="Image de l'article" />
                                     <p><?= htmlspecialchars($product['nom_article']) ?></p>
                                 </td>
                                 <td><?= number_format(htmlspecialchars($product['prix_article']), 2, ',', ' ') ?> €</td>

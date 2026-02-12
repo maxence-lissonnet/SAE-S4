@@ -5,8 +5,8 @@ class DB
     private $host = 'localhost';
     private $port = '3306';
     private $db = 'sae'; // <- ici
-    private $db_user = 'etu'; // <- ici
-    private $db_pass = 'motdepasse'; // <- ici
+    private $db_user = 'root'; // <- ici
+    private $db_pass = ''; // <- ici
 
     public function connect()
     {
@@ -26,8 +26,7 @@ class DB
         $conn = $this->connect();
 
         $stmt = $conn->prepare($sql);
-        if (!empty($types))
-        {
+        if (!empty($types)) {
             $stmt->bind_param($types, ...$args);
         }
 
@@ -44,8 +43,7 @@ class DB
         $conn = $this->connect();
 
         $stmt = $conn->prepare($sql);
-        if (!empty($types))
-        {
+        if (!empty($types)) {
             $stmt->bind_param($types, ...$args);
         }
         $stmt->execute();
@@ -63,4 +61,3 @@ class DB
         return htmlspecialchars($input);
     }
 }
-?>

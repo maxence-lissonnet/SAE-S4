@@ -2,7 +2,7 @@
  * The base URL for the server API.
  * @constant {string}
  */
-const SERVER_API_URL = '/api';
+const SERVER_API_URL = '../../api';
 
 /**
  * If true, the fetch requests are logged in the console.
@@ -21,7 +21,7 @@ const DEBUG_FETCHS = isDebug();
 async function request(endpoint, method = 'GET', data = null, headers = {}) {
 
     // Create url
-    if (!endpoint.startsWith('/'))
+    if (!endpoint.startsWith(''))
         endpoint = endpoint + '/';
     const url = SERVER_API_URL + endpoint;
     
