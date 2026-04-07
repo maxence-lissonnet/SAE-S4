@@ -1,10 +1,10 @@
-<link rel="shortcut icon" href="/admin/ressources/favicon.png" type="image/x-icon">
+<link rel="shortcut icon" href="Asset/image/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="Asset/Style/header_style.css">
 <?php $isLoggedIn = isset($_SESSION["userid"]); ?>
 <!-- HEADER -->
 <header>
     <a id="accueil" href="index.php?page=accueil">
-        <img src="assets/logo.png" alt="Logo de l'ADIIL">
+        <img src="Asset/image/logo.png" alt="Logo de l'ADIIL">
     </a>
     <nav>
         <ul>
