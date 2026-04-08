@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
     <title>Boutique</title>
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/shop_style.css">
 </head>
 
@@ -20,11 +15,11 @@
             </fieldset>
 
             <details <?= !empty($filters) ? 'open' : '' ?>>
-                <summary>Catégories</summary>
+                <summary>Cat&eacute;gories</summary>
                 <fieldset>
                     <?php foreach (['Sucré', 'Salé', 'Boisson', 'Merch'] as $cat) : ?>
                         <label>
-                            <input type="checkbox" name="category[]" value="<?= $cat ?>" <?= in_array($cat, $filters) ? 'checked' : '' ?>> <?= $cat ?>
+                            <input type="checkbox" name="category[]" value="<?= $cat ?>" <?= in_array($cat, $filters, true) ? 'checked' : '' ?>> <?= $cat ?>
                         </label><br>
                     <?php endforeach; ?>
                 </fieldset>
@@ -34,12 +29,12 @@
                 <option value="name_asc" <?= $orderBy === 'name_asc' ? 'selected' : '' ?>>A-Z</option>
                 <option value="price_asc" <?= $orderBy === 'price_asc' ? 'selected' : '' ?>>Prix croissant</option>
             </select>
-            <button type="submit" name="reset">Réinitialiser</button>
+            <button type="submit" name="reset">R&eacute;initialiser</button>
         </form>
 
-        <div id='cart-info'>
+        <div id="cart-info">
             <a href="index.php?page=cart">
-                <img src="assets/logo_caddie.png" alt="Panier">
+                <img src="Asset/image/logo_caddie.png" alt="Logo du panier">
                 <p>Panier (<span id="count"><?= $cart->count(); ?></span>)</p>
             </a>
         </div>
@@ -49,9 +44,19 @@
         <?php if (!empty($products)) : ?>
             <?php foreach ($products as $product) : ?>
                 <div id="one-product">
-                    <img src="<?= $product['image_article'] ? 'api/files/' . $product['image_article'] : 'admin/ressources/default_images/boutique.png' ?>" alt="Article">
-                    <h3><?= htmlspecialchars($product['nom_article']) ?></h3>
-                    <p><?= number_format($product['prix_article'], 2, ',', ' ') ?> €</p>
+                    <div>
+                        <img src="<?= htmlspecialchars($product['resolved_image_article']) ?>" alt="<?= htmlspecialchars($product['nom_article']) ?>">
+                        <h3 title="<?= htmlspecialchars($product['nom_article']) ?>">
+                            <?= htmlspecialchars($product['nom_article']) ?>
+                        </h3>
+                        <p><?= number_format((float) $product['prix_article'], 2, ',', ' ') ?> &euro;</p>
+                        <p>
+                            <?= htmlspecialchars((string) $product['xp_article']) ?> XP
+                            <?php if (!(int) $product['reduction_article']): ?>
+                                <span>*</span>
+                            <?php endif; ?>
+                        </p>
+                    </div>
 
                     <?php if ($product['stock_article'] != 0) : ?>
                         <a class="addCart" href="cart_add.php?id=<?= $product['id_article'] ?>">Ajouter au panier</a>
@@ -65,7 +70,7 @@
         <?php endif; ?>
     </div>
 
-    <?php require_once "footerVue.php"; ?>
+    <?php require_once 'footerVue.php'; ?>
     <script src="scripts/add_cart.js"></script>
 </body>
 

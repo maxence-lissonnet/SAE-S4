@@ -45,8 +45,25 @@ switch ($page) {
         require_once __DIR__ . "/Controller/BoutiqueController.php";
         break;
 
+    case 'cart':
+        require_once __DIR__ . "/Controller/CartController.php";
+        break;
+
+    case 'add_cart':
+        require_once __DIR__ . "/Controller/BoutiqueController.php";
+        require_once __DIR__ . "/Controller/add_Cart.php";
+        break;
+
     case 'login':
         require_once __DIR__ . "/Controller/LoginController.php";
+        break;
+
+    case 'about':
+        require_once __DIR__ . "/Controller/AboutController.php";
+        break;
+
+    case 'grade':
+        require_once __DIR__ . "/Controller/GradeController.php";
         break;
 
     default:

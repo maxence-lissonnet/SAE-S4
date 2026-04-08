@@ -14,6 +14,15 @@
 
 <body>
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
+    <?php
+    $resolveImage = static function ($path, $fallback = 'API/files/default-event.png') {
+        if (empty($path)) {
+            return $fallback;
+        }
+
+        return preg_match('#^https?://#i', $path) ? $path : 'API/files/' . ltrim($path, '/');
+    };
+    ?>
 
     <section class="event-details">
         <?php if (empty($actualite['image_actualite'])) : ?>

@@ -10,9 +10,18 @@
 
 <body>
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
+    <?php
+    $resolveImage = static function ($path, $fallback = 'API/files/default-event.png') {
+        if (empty($path)) {
+            return $fallback;
+        }
+
+        return preg_match('#^https?://#i', $path) ? $path : 'API/files/' . ltrim($path, '/');
+    };
+    ?>
 
     <section class="event-details">
-        <img src="<?php echo $event['image_evenement'] ? '../API/files/' . $event['image_evenement'] : 'admin/ressources/default_images/event.jpg'; ?>" alt="Image">
+        <img src="<?php echo htmlspecialchars($resolveImage($event['image_evenement'] ?? null)); ?>" alt="Image">
 
         <h1><?php echo strtoupper(htmlspecialchars($event['nom_evenement'])); ?></h1>
 
@@ -45,7 +54,7 @@
             <?php endif; ?>
         </ul>
 
-        <p><?php echo nl2br(htmlspecialchars($event['description_evenement'])); ?></p>
+        <p><?php echo nl2br(htmlspecialchars($event['description_evenement'] ?? '')); ?></p>
     </section>
 
     <section class="gallery">
@@ -53,16 +62,16 @@
         <?php if ($isLoggedIn) : ?>
             <h3>Mes photos</h3>
             <div class="my-medias">
-                <?php foreach ($my_medias as $img) : ?>
-                    <img src="../API/files/<?php echo trim($img['url_media']); ?>" alt="Média perso">
+                <?php foreach ($my_medias as $img): ?>
+                    <img src="<?php echo htmlspecialchars($resolveImage(trim($img['url_media']))); ?>" alt="Media perso">
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
 
-        <h3>Collection Generale</h3>
+        <h3>Collection generale</h3>
         <div class="general-medias">
-            <?php foreach ($general_medias as $img) : ?>
-                <img src="../API/files/<?php echo trim($img['url_media']); ?>" alt="Média">
+            <?php foreach ($general_medias as $img): ?>
+                <img src="<?php echo htmlspecialchars($resolveImage(trim($img['url_media']))); ?>" alt="Media">
             <?php endforeach; ?>
         </div>
 
