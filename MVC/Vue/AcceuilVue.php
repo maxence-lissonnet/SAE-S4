@@ -102,7 +102,7 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
 
         </section>
     </div>
-    <?php require_once 'footerVue.php'; ?>
+    <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
     <script src="scripts/event_details_redirect.js"></script>
     <script src="scripts/bubble.js"></script>
 </body>

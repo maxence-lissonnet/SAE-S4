@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
     <title>Boutique</title>
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/shop_style.css">
 </head>
 
@@ -54,7 +49,7 @@
                     <p><?= number_format($product['prix_article'], 2, ',', ' ') ?> €</p>
 
                     <?php if ($product['stock_article'] != 0): ?>
-                        <a class="addCart" href="cart_add.php?id=<?= $product['id_article'] ?>">Ajouter au panier</a>
+                        <a class="addCart" href="index.php?page=add_cart&id=<?= $product['id_article'] ?>">Ajouter au panier</a>
                     <?php else: ?>
                         <button disabled>Épuisé</button>
                     <?php endif; ?>

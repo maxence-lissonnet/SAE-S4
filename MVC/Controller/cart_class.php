@@ -1,13 +1,11 @@
 <?php
 class cart
 {
-
     private $db;
 
     public function __construct($db)
     {
-
-        if (!isset($_SESSION)) {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -26,19 +24,19 @@ class cart
         }
     }
 
-
     public function recalc()
     {
-        // Récupérer tous les ids des produits présents dans le panier
         $product_ids = array_keys($_SESSION['cart']);
         if (empty($product_ids)) {
             return;
         }
 
-        // Requête pour récupérer les stocks
         $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
         $query = "SELECT id_article, stock_article FROM ARTICLE WHERE id_article IN ($placeholders)";
-        $products = $this->db->select($query, str_repeat("i", count($product_ids)), $product_ids);
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(array_values($product_ids));
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $stocks = [];
         foreach ($products as $product) {
@@ -49,16 +47,13 @@ class cart
             if (isset($_POST['cart']['quantity'][$product_id])) {
                 $new_quantity = $_POST['cart']['quantity'][$product_id];
 
-                // Vérifier si la quantité est un nombre entier positif (> 0)
                 if (!is_numeric($new_quantity) || intval($new_quantity) != $new_quantity || $new_quantity <= 0) {
-                    // Si non valide, restaurer la quantité actuelle
                     $_SESSION['cart'][$product_id] = $current_quantity;
                     continue;
                 }
 
                 $new_quantity = intval($new_quantity);
 
-                // Vérifier si le stock est suffisant
                 if (isset($stocks[$product_id]) && $new_quantity > $stocks[$product_id]) {
                     $_SESSION['cart'][$product_id] = $stocks[$product_id];
                 } else {
@@ -68,25 +63,20 @@ class cart
         }
     }
 
-
-
     public function total()
     {
         $total = 0;
-
         $ids = array_keys($_SESSION['cart']);
+
         if (empty($ids)) {
             $products = array();
         } else {
             $placeholders = implode(",", array_fill(0, count($ids), "?"));
             $query = "SELECT id_article, prix_article FROM ARTICLE WHERE id_article IN ($placeholders)";
-            $types = str_repeat("i", count($ids));
 
-            $products = $this->db->select(
-                $query,
-                $types,
-                $ids
-            );
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(array_values($ids));
+            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         foreach ($products as $product) {

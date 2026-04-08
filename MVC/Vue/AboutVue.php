@@ -1,46 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+require_once __DIR__ . '/../Controller/HeaderController.php';
+?>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À propos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link rel="stylesheet" href="styles/about_style.css">
-
-    <link rel="stylesheet" href="styles/general_style.css">
-    <link rel="stylesheet" href="styles/header_style.css">
-    <link rel="stylesheet" href="styles/footer_style.css">
-
+    <link rel="stylesheet" href="Asset/Style/about_style.css">
+    <link rel="stylesheet" href="Asset/Style/general_style.css">
 </head>
-
 
 <body class="body_margin">
 
-
-
-    <!--------------->
-    <!------PHP------>
-    <!--------------->
-
-
-    <!-- Importer les fichiers -->
-    <?php
-    require_once "header.php"
-    ?>
-
-
-
-
-
-    <!--------------->
-    <!------HTML----->
-    <!--------------->
-
-
-    <!-- CORPS DE LA PRESENTATION -->
     <H1 class='titre_section_apropos'>LE BUREAU</H1>
     <section id="bureau">
         <img src="assets/photo_bureau_ADIIL.png" alt="Photo de groupe du bureau du BDE 2024" />
@@ -87,7 +55,7 @@
 
 
 
-    <?php require_once "footer.php" ?>
+    <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
 
 </body>
 
