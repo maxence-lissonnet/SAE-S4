@@ -59,4 +59,14 @@ class GradeModel
         $stmt = $this->db->prepare("DELETE FROM ADHESION WHERE id_membre = ?");
         return $stmt->execute([$userid]);
     }
+
+    public function replaceSubscription($userId, $gradeId, $price, $paymentMode)
+    {
+        $stmtDelete = $this->db->prepare("DELETE FROM ADHESION WHERE id_membre = ?");
+        $stmtDelete->execute([$userId]);
+
+        // 2. Insertion de la nouvelle adhésion
+        $stmtInsert = $this->db->prepare("INSERT INTO ADHESION (id_membre, id_grade, prix_adhesion, paiement_adhesion, date_adhesion) VALUES (?, ?, ?, ?, NOW())");
+        return $stmtInsert->execute([$userId, $gradeId, $price, $paymentMode]);
+    }
 }

@@ -58,12 +58,49 @@ switch ($page) {
         require_once __DIR__ . "/Controller/LoginController.php";
         break;
 
+    case 'signin':
+        require_once __DIR__ . "/Controller/SigninController.php";
+        break;
+
+    case 'account':
+        require_once __DIR__ . "/Controller/AccountController.php";
+        break;
+
+    case 'delete_account':
+        require_once __DIR__ . "/Controller/DeleteAccountController.php";
+        break;
+
     case 'about':
         require_once __DIR__ . "/Controller/AboutController.php";
         break;
 
     case 'grade':
         require_once __DIR__ . "/Controller/GradeController.php";
+        break;
+
+    case 'grade_subscription':
+        require_once __DIR__ . "/Controller/Grade_subscriptionController.php";
+        break;
+
+    case 'agenda':
+        require_once __DIR__ . "/Controller/AgendaController.php";
+        break;
+
+    case 'my_gallery':
+        require_once __DIR__ . "/Controller/MyGalleryController.php";
+        break;
+
+    case 'add_media':
+        require_once __DIR__ . "/Controller/AddMediaController.php";
+        break;
+
+    case 'delete_media':
+        require_once __DIR__ . "/Controller/MyGalleryController.php";
+        require_once __DIR__ . "/Controller/DeleteMediaController.php";
+        break;
+
+    case 'order':
+        require_once 'Controller/OrderController.php';
         break;
 
     default:

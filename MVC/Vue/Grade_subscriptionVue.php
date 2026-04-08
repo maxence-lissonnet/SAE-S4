@@ -5,16 +5,13 @@
 
 <body class="body_margin">
 
-    <?php
-    require_once __DIR__ . '/../Controller/HeaderController.php';
-    
-    ?>
+    <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
 
     <h1>MON ADHESION</h1>
 
     <div>
         <button id="cart-button">
-            <a href="/grade.php">
+            <a href="index.php?page=grade">
                 <img src="/assets/fleche_retour.png" alt="Flèche de retour">
                 Retourner aux grades
             </a>
@@ -34,15 +31,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Grade <?php echo htmlspecialchars($grade[0]['nom_grade']); ?></td>
+                        <td>Grade <?= htmlspecialchars($grade['nom_grade']) ?></td>
                         <td>1</td>
-                        <td><?= number_format(htmlspecialchars($grade[0]['prix_grade']), 2, ',', ' ') ?> €</td>
-                        <td><?= number_format(htmlspecialchars($grade[0]['prix_grade']), 2, ',', ' ') ?> €</td>
+                        <td><?= number_format(htmlspecialchars($grade['prix_grade']), 2, ',', ' ') ?> €</td>
+                        <td><?= number_format(htmlspecialchars($grade['prix_grade']), 2, ',', ' ') ?> €</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h3>Total &nbsp : &nbsp<?= number_format(htmlspecialchars($grade[0]['prix_grade']), 2, ',', ' ') ?> €</h3>
+            <h3>Total &nbsp : &nbsp<?= number_format(htmlspecialchars($grade['prix_grade']), 2, ',', ' ') ?> €</h3>
         </div>
 
         <div>
@@ -53,8 +50,9 @@
                 <option value="carte_credit">Carte de Crédit</option>
                 <option value="paypal">PayPal</option>
             </select><br><br>
+
             <div id="carte_credit" class="mode_paiement_fields">
-                <form method="POST" action="/grade_subscription.php?id=<?= $id_grade ?>">
+                <form method="POST" action="index.php?page=grade_subscription&id=<?= $id_grade ?>">
                     <input type="hidden" name="mode_paiement" value="carte_credit">
 
                     <label for="numero_carte">Numéro de Carte :</label>
@@ -69,19 +67,18 @@
                     <button type="submit" id="finalise-order-button">Valider l'adhésion</button>
                 </form>
             </div>
+
             <div id="paypal" class="mode_paiement_fields" style="display: none;">
-                <form method="POST" action="/grade_subscription.php?id=<?= $id_grade ?>">
+                <form method="POST" action="index.php?page=grade_subscription&id=<?= $id_grade ?>">
                     <input type="hidden" name="mode_paiement" value="paypal">
 
                     <button type="button" id="paypal-button">Se connecter à PayPal</button><br><br>
 
-                    <button type="submit" id="finalise-order-button">Valider l'adhésion'</button>
+                    <button type="submit" id="finalise-order-button">Valider l'adhésion</button>
                 </form>
             </div>
         </div>
     </div>
-
-
 
     <script>
         document.getElementById('mode_paiement').addEventListener('change', function() {
@@ -99,5 +96,3 @@
     <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
 
 </body>
-
-</html>
