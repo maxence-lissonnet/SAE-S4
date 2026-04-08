@@ -7,7 +7,7 @@
     <title>Adhérer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="/admin/ressources/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="Asset/Admin/ressources/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="Asset/Style/header_style.css">
     <link rel="stylesheet" href="Asset/Style/general_style.css">
 </head>
@@ -50,7 +50,7 @@
 
                 <?php if ($isAdmin) : ?>
                     <li>
-                        <a id="header_admin" href="admin/admin.php">Panel Admin</a>
+                        <a id="header_admin" href="index.php?page=admin">Panel Admin</a>
                     </li>
                 <?php endif; ?>
 
