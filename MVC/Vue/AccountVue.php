@@ -1,11 +1,31 @@
 <head>
     <title>Mon compte</title>
-    <link rel="stylesheet" href="assets/styles/account_style.css">
+    <link rel="stylesheet" href="Asset/Style/account_style.css">
 </head>
 
 <body class="body_margin">
 
     <?php require_once __DIR__ . "/../Controller/HeaderController.php"; ?>
+    <?php
+    $resolveAccountFile = static function ($path, $fallback) {
+        if (empty($path)) {
+            return $fallback;
+        }
+
+        $path = trim((string) $path);
+        if (preg_match('#^https?://#i', $path)) {
+            return $path;
+        }
+
+        $relativePath = ltrim(str_replace('\\', '/', $path), '/');
+        $fullPath = __DIR__ . '/../API/files/' . str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
+
+        return is_file($fullPath) ? 'API/files/' . $relativePath : $fallback;
+    };
+
+    $profilePictureUrl = $resolveAccountFile($infoUser['pp_membre'] ?? null, 'Asset/image/user.jpg');
+    $gradeImageUrl = $resolveAccountFile($infoUser['image_grade'] ?? null, 'Asset/image/grade.webp');
+    ?>
 
     <h2>MON COMPTE</h2>
 
@@ -25,22 +45,18 @@
             <div>
                 <form method="POST" action="index.php?page=account" enctype="multipart/form-data" id="pp-form">
                     <label id="cadre-pp" for="profilePictureInput">
-                        <?php if (empty($infoUser['pp_membre'])): ?>
-                            <img src="admin/ressources/default_images/user.jpg" alt="Photo de profil de l'utilisateur" />
-                        <?php else: ?>
-                            <img src="api/files/<?= htmlspecialchars($infoUser['pp_membre']) ?>" alt="Photo de profil de l'utilisateur" />
-                        <?php endif; ?>
+                        <img src="<?= htmlspecialchars($profilePictureUrl) ?>" alt="Photo de profil de l'utilisateur" />
                     </label>
 
                     <input type="file" id="profilePictureInput" name="file" accept="image/jpeg, image/png, image/webp" style="display: none;" onchange="this.form.submit()">
 
                     <button type="button" id="edit-icon" onclick="document.getElementById('profilePictureInput').click()">
-                        <img src="assets/edit_logo.png" alt="Icone éditer la photo de profil" />
+                        <img src="Asset/image/edit_logo.png" alt="Icone éditer la photo de profil" />
                     </button>
                 </form>
             </div>
             <div>
-                <p><?= htmlspecialchars($infoUser['xp_membre']) ?></p>
+                <p><?= htmlspecialchars((string) $infoUser['xp_membre']) ?></p>
                 <p>XP</p>
             </div>
             <div id="cadre-grade">
@@ -48,11 +64,7 @@
                     <p>Vous n'avez pas de grade</p>
                 <?php else: ?>
                     <p><?= htmlspecialchars($infoUser['nom_grade']) ?></p>
-                    <?php if (empty($infoUser['image_grade'])): ?>
-                        <img src="admin/ressources/default_images/grade.webp" alt="Image du grade" />
-                    <?php else: ?>
-                        <img src="api/files/<?= htmlspecialchars($infoUser['image_grade']) ?>" alt="Illustration du grade" />
-                    <?php endif; ?>
+                    <img src="<?= htmlspecialchars($gradeImageUrl) ?>" alt="Illustration du grade" />
                 <?php endif; ?>
             </div>
         </div>
@@ -77,7 +89,7 @@
             </div>
 
             <button type="submit">
-                <img src="assets/save_logo.png" alt="Logo enregistrer les modifications" />
+                <img src="Asset/image/save_logo.png" alt="Logo enregistrer les modifications" />
             </button>
         </form>
 
@@ -92,7 +104,7 @@
                     <input type="password" id="newMdpVerif" name="newMdpVerif" placeholder="Confirmation du nouveau mot de passe" required>
                 </div>
             </div>
-            <button type="submit"><img src="assets/save_logo.png" alt="Logo enregistrer" /></button>
+            <button type="submit"><img src="Asset/image/save_logo.png" alt="Logo enregistrer" /></button>
         </form>
     </section>
 
@@ -100,21 +112,21 @@
         <div id="buttons-section">
             <button type="button">
                 <a href="https://discord.com/login" target="_blank">
-                    <img src="assets/logo_discord.png" alt="Logo de Discord"> Associer mon compte à Discord
+                    <img src="Asset/image/logo_discord.png" alt="Logo de Discord"> Associer mon compte à Discord
                 </a>
             </button>
 
             <form action="index.php?page=account" method="post">
                 <input type="hidden" name="deconnexion" value="true">
                 <button type="submit">
-                    <img src="assets/logOut_icon.png" alt="icone de deconnexion"> Déconnexion
+                    <img src="Asset/image/logOut_icon.png" alt="icone de deconnexion"> Déconnexion
                 </button>
             </form>
 
             <form action="index.php?page=delete_account" method="post">
                 <input type="hidden" name="delete_account" value="true">
                 <button type="submit">
-                    <img src="assets/delete_icon.png" alt="icone de suppression"> Supprimer mon compte
+                    <img src="Asset/image/delete_icon.png" alt="icone de suppression"> Supprimer mon compte
                 </button>
             </form>
         </div>
@@ -151,8 +163,8 @@
                                 <td><?= htmlspecialchars($achat['date_transaction']) ?></td>
                                 <td><?= htmlspecialchars($achat['type_transaction']) ?></td>
                                 <td><?= htmlspecialchars($achat['element']) ?></td>
-                                <td><?= htmlspecialchars($achat['quantite']) ?></td>
-                                <td><?= number_format($achat['montant'], 2, ',', ' ') ?> €</td>
+                                <td><?= htmlspecialchars((string) $achat['quantite']) ?></td>
+                                <td><?= number_format((float) $achat['montant'], 2, ',', ' ') ?> &euro;</td>
                                 <td><?= htmlspecialchars($achat['mode_paiement']) ?></td>
                                 <td><?= htmlspecialchars($achat['statut']) ?></td>
                             </tr>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?php echo htmlspecialchars($event['nom_evenement']); ?></title>
+    <title><?= htmlspecialchars($event['nom_evenement']) ?></title>
     <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/event_details_style.css">
 </head>
@@ -21,12 +21,12 @@
     ?>
 
     <section class="event-details">
-        <img src="<?php echo htmlspecialchars($resolveImage($event['image_evenement'] ?? null)); ?>" alt="Image">
+        <img src="<?= htmlspecialchars($resolveImage($event['image_evenement'] ?? null)) ?>" alt="Image">
 
-        <h1><?php echo strtoupper(htmlspecialchars($event['nom_evenement'])); ?></h1>
+        <h1><?= strtoupper(htmlspecialchars($event['nom_evenement'])) ?></h1>
 
         <div>
-            <h2><?php echo date('d/m/Y', strtotime($event['date_evenement'])); ?></h2>
+            <h2><?= date('d/m/Y', strtotime($event['date_evenement'])) ?></h2>
 
             <?php if ($event_date < $current_date) : ?>
                 <button class="subscription" id="passed_subscription">Passé</button>
@@ -34,7 +34,7 @@
                 <button class="subscription" id="passed_subscription">Inscrit</button>
             <?php else : ?>
                 <form class="subscription" action="index.php?page=event_inscription" method="post">
-                    <input type="hidden" name="eventid" value="<?php echo $eventid; ?>">
+                    <input type="hidden" name="eventid" value="<?= $eventid; ?>">
                     <button type="submit">Inscription</button>
                 </form>
             <?php endif; ?>
@@ -42,10 +42,10 @@
 
         <ul>
             <li>
-                <h3>📍 <?php echo htmlspecialchars($event['lieu_evenement']); ?></h3>
+                <h3>📍 <?= htmlspecialchars($event['lieu_evenement']) ?></h3>
             </li>
             <li>
-                <h3>💸 <?php echo $event['prix_evenement']; ?>€ par personne</h3>
+                <h3>💸 <?= htmlspecialchars((string) $event['prix_evenement']) ?>€ par personne</h3>
             </li>
             <?php if ($event['reductions_evenement']) : ?>
                 <li>
@@ -54,16 +54,16 @@
             <?php endif; ?>
         </ul>
 
-        <p><?php echo nl2br(htmlspecialchars($event['description_evenement'] ?? '')); ?></p>
+        <p><?= nl2br(htmlspecialchars($event['description_evenement'] ?? '')) ?></p>
     </section>
 
-    <section class="gallery">
+    <section class="gallery" id="gallery">
         <h2>GALERIE</h2>
         <?php if ($isLoggedIn) : ?>
             <h3>Mes photos</h3>
             <div class="my-medias">
                 <?php foreach ($my_medias as $img): ?>
-                    <img src="<?php echo htmlspecialchars($resolveImage(trim($img['url_media']))); ?>" alt="Media perso">
+                    <img src="<?= htmlspecialchars($resolveImage(trim($img['url_media']))) ?>" alt="Media perso">
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
@@ -71,22 +71,22 @@
         <h3>Collection generale</h3>
         <div class="general-medias">
             <?php foreach ($general_medias as $img): ?>
-                <img src="<?php echo htmlspecialchars($resolveImage(trim($img['url_media']))); ?>" alt="Media">
+                <img src="<?= htmlspecialchars($resolveImage(trim($img['url_media']))) ?>" alt="Media">
             <?php endforeach; ?>
         </div>
 
         <div class="show-more">
-            <a href="?id=<?php echo $eventid; ?>&show=<?php echo $show + 8; ?>#gallery">Voir plus</a>
+            <a href="index.php?page=event_detail&id=<?= $eventid; ?>&show=<?= $show + 8; ?>#gallery">Voir plus</a>
             <?php if ($show > 8) : ?>
-                <a href="?id=<?php echo $eventid; ?>&show=<?php echo max(8, $show - 8); ?>#gallery">Voir moins</a>
+                <a href="index.php?page=event_detail&id=<?= $eventid; ?>&show=<?= max(8, $show - 8); ?>#gallery">Voir moins</a>
             <?php endif; ?>
         </div>
     </section>
 
-    <?php require_once 'footerVue.php'; ?>
-    <script src="/scripts/open_media.js"></script>
-    <script src="/scripts/add_media.js"></script>
-    <script src="/scripts/open_gallery.js"></script>
+    <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
+    <script src="Asset/Script/open_media.js"></script>
+    <script src="Asset/Script/add_media.js"></script>
+    <script src="Asset/Script/open_gallery.js"></script>
 </body>
 
 </html>

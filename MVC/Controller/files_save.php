@@ -3,19 +3,32 @@ function generateUUID()
 {
     $data = random_bytes(16);
 
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
-    $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
 
     return bin2hex($data);
 }
 
+function getFilesDirectory(): string
+{
+    return __DIR__ . '/../API/files/';
+}
+
+function normalizeStoredFilename(string $fileName): string
+{
+    return ltrim(str_replace('\\', '/', $fileName), '/');
+}
+
 function saveFile(): string | null
 {
-    // Retourne le nom du fichier si l'enregistrement a réussi, faux sinon.
-
     $name = generateUUID() . '.' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    $targetDirectory = getFilesDirectory();
 
-    if (move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . 'api/files/' . $name)) {
+    if (!is_dir($targetDirectory)) {
+        mkdir($targetDirectory, 0777, true);
+    }
+
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $targetDirectory . $name)) {
         return $name;
     }
 
@@ -24,29 +37,28 @@ function saveFile(): string | null
 
 function saveImage(): string | null
 {
-    // Vérification des données de l'image, puis enregistrement.
-    // Retourne Faux si l'image n'en est pas une, ou si elle n'a pas pu être enregistrée.
-
     if (!isset($_FILES['file']) || $_FILES['file']['tmp_name'] === '') {
         return null;
     }
 
-    // Vérifie le type MIME avec finfo
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $mimeType = $finfo->file($_FILES['file']['tmp_name']);
     $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!in_array($mimeType, $allowedTypes)) {
+
+    if (!in_array($mimeType, $allowedTypes, true)) {
         return null;
     }
 
-    // On s'assure que l'extension du fichier ne causerait pas de problèmes
     return saveFile();
 }
 
 function deleteFile(string $fileName): bool
 {
-    if (file_exists(__DIR__ . "api/files/" . $fileName)) {
-        unlink(__DIR__ . "api/files/" . $fileName);
+    $normalizedFileName = normalizeStoredFilename($fileName);
+    $fullPath = getFilesDirectory() . str_replace('/', DIRECTORY_SEPARATOR, $normalizedFileName);
+
+    if (file_exists($fullPath)) {
+        unlink($fullPath);
         return true;
     }
 

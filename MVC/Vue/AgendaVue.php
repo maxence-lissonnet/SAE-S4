@@ -3,7 +3,7 @@
 
 <head>
     <title>Agenda</title>
-    <link rel="stylesheet" href="assets/styles/planner_style.css">
+    <link rel="stylesheet" href="Asset/Style/planner_style.css">
 </head>
 
 <body class="body_margin">

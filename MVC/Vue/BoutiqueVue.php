@@ -71,7 +71,7 @@
     </div>
 
     <?php require_once 'footerVue.php'; ?>
-    <script src="scripts/add_cart.js"></script>
+    <script src="Asset/Script/add_cart.js"></script>
 </body>
 
 </html>

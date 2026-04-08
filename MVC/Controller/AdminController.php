@@ -13,7 +13,7 @@ $userId = $_SESSION['userid'];
 
 if (!$membreModel->check_admin_permission($userId)) {
     http_response_code(403);
-require_once __DIR__ . '/../Vue/Admin/AdminUnauthorizedVue.php';
+    require_once __DIR__ . '/../Vue/Admin/AdminUnauthorizedVue.php';
     return;
 }
 

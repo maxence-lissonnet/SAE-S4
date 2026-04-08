@@ -22,9 +22,9 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
         <div id="product-list">
             <?php foreach ($products as $product): ?>
                 <div class="product-card">
-                    <img src="<?= $product['image_grade'] ? 'api/files/' . $product['image_grade'] : 'admin/ressources/default_images/grade.webp' ?>" alt="Image">
+                    <img src="<?= htmlspecialchars($product['resolved_image_grade']) ?>" alt="Image du grade">
                     <h3><?= htmlspecialchars($product['nom_grade']) ?></h3>
-                    <p><?= number_format($product['prix_grade'], 2, ',', ' ') ?> €</p>
+                    <p><?= number_format((float) $product['prix_grade'], 2, ',', ' ') ?> &euro;</p>
 
                     <?php if ($product['owned']): ?>
                         <button disabled>Déjà détenu</button>

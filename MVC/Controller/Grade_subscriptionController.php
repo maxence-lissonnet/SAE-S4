@@ -2,7 +2,7 @@
 
 // Importer les fichiers
 require_once __DIR__ . "/../Model/GradeModel.php";
-require_once 'files_save.php'; // Garde-le si tu as besoin des fonctions de fichiers
+require_once __DIR__ . '/files_save.php';
 
 $gradeSubscriptionModel = new GradeModel($db);
 

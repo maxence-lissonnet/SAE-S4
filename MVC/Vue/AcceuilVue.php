@@ -121,8 +121,8 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
         </section>
     </div>
     <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
-    <script src="scripts/event_details_redirect.js"></script>
-    <script src="scripts/bubble.js"></script>
+    <script src="Asset/Script/event_details_redirect.js"></script>
+    <script src="Asset/Script/bubble.js"></script>
 </body>
 
 </html>

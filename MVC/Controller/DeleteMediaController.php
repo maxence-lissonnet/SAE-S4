@@ -6,7 +6,7 @@ if (!isset($_SESSION["userid"])) {
     exit();
 }
 
-require_once __DIR__ . '/../files_save.php';
+require_once __DIR__ . '/files_save.php';
 require_once __DIR__ . '/../Model/GalleryModel.php';
 
 $galleryModel = new GalleryModel($db);

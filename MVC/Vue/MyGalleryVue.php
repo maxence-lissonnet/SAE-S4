@@ -1,6 +1,6 @@
 <head>
     <title>Ma Galerie</title>
-    <link rel="stylesheet" href="assets/styles/my_gallery_style.css">
+    <link rel="stylesheet" href="Asset/Style/my_gallery_style.css">
 </head>
 
 <body>
@@ -8,7 +8,7 @@
 
     <section class="user-gallery">
 
-        <a href="index.php?page=event_details&id=<?= htmlspecialchars($eventId) ?>" class="back-arrow">
+        <a href="<?= $eventId ? 'index.php?page=event_detail&id=' . urlencode((string) $eventId) : 'index.php?page=events' ?>" class="back-arrow">
             &#8592;<span>Retour</span>
         </a>
 
@@ -16,29 +16,31 @@
         <h2><?= htmlspecialchars($eventName) ?></h2>
 
         <div class="my-medias">
-            <form id="add-media" action="index.php?page=add_media" method="post" enctype="multipart/form-data">
-                <label for="file-picker">
-                    <img src="assets/add_media.png" alt="Ajouter un média">
-                </label>
-                <input type="hidden" name="eventid" value="<?= htmlspecialchars($eventId) ?>">
-                <input type="hidden" name="userid" value="<?= htmlspecialchars($userId) ?>">
+            <?php if ($eventId !== null): ?>
+                <form id="add-media" action="index.php?page=add_media" method="post" enctype="multipart/form-data">
+                    <label for="file-picker">
+                        <img src="Asset/image/add_media.png" alt="Ajouter un média">
+                    </label>
+                    <input type="hidden" name="eventid" value="<?= htmlspecialchars((string) $eventId) ?>">
+                    <input type="hidden" name="userid" value="<?= htmlspecialchars((string) $userId) ?>">
 
-                <input type="file" id="file-picker" name="file" accept="image/jpeg, image/png, image/webp" hidden>
-                <button type="submit" style="display:none;">Envoyer</button>
-            </form>
+                    <input type="file" id="file-picker" name="file" accept="image/jpeg, image/png, image/webp" hidden>
+                    <button type="submit" style="display:none;">Envoyer</button>
+                </form>
+            <?php endif; ?>
 
             <?php if (!empty($medias)): ?>
                 <?php foreach ($medias as $img): ?>
                     <div class="media-container">
-                        <img src="api/files/<?= htmlspecialchars(trim($img['url_media'])) ?>" alt="Image Personnelle de l'événement">
+                        <img src="API/files/<?= htmlspecialchars(trim($img['url_media'])) ?>" alt="Image Personnelle de l'événement">
 
                         <div class="delete-icon">
                             <form class="delete-media" action="index.php?page=delete_media" method="post">
                                 <label for="del-media-<?= $img['id_media'] ?>">
-                                    <img src="assets/delete_icon.png" alt="poubelle">
+                                    <img src="Asset/image/delete_icon.png" alt="poubelle">
                                 </label>
-                                <input type="hidden" name="mediaid" value="<?= htmlspecialchars($img['id_media']) ?>">
-                                <input type="hidden" name="eventid" value="<?= htmlspecialchars($eventId) ?>">
+                                <input type="hidden" name="mediaid" value="<?= htmlspecialchars((string) $img['id_media']) ?>">
+                                <input type="hidden" name="eventid" value="<?= htmlspecialchars((string) $eventId) ?>">
 
                                 <button type="submit" id="del-media-<?= $img['id_media'] ?>" style="display:none;">Envoyer</button>
                             </form>
@@ -53,9 +55,9 @@
 
     <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
 
-    <script src="assets/scripts/open_media.js"></script>
-    <script src="assets/scripts/add_media.js"></script>
-    <script src="assets/scripts/delete_media.js"></script>
+    <script src="Asset/Script/open_media.js"></script>
+    <script src="Asset/Script/add_media.js"></script>
+    <script src="Asset/Script/delete_media.js"></script>
 
 </body>
 

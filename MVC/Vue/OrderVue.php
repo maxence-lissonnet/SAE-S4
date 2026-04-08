@@ -1,6 +1,6 @@
 <head>
     <title>Commander</title>
-    <link rel="stylesheet" href="assets/styles/order_style.css">
+    <link rel="stylesheet" href="Asset/Style/order_style.css">
 </head>
 
 <body class="body_margin">
@@ -12,7 +12,7 @@
     <div>
         <button id="cart-button">
             <a href="index.php?page=cart">
-                <img src="assets/fleche_retour.png" alt="Fleche de retour">
+                <img src="Asset/image/fleche_retour.png" alt="Fleche de retour">
                 Retourner au panier
             </a>
         </button>
