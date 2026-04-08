@@ -34,7 +34,7 @@
 
         <div>
             <button id="shop-button">
-                <a href="shop.php">
+                <a href="index.php?page=boutique">
                     <img src="/assets/fleche_retour.png" alt="Fleche de retour">
                     Retourner à la boutique
                 </a>
@@ -44,7 +44,7 @@
 
     <?php if (!empty($_SESSION['cart']) && !empty($products)) : ?>
         <div id='cart-container'>
-            <form method="POST" action="/cart.php" id="form-quantity">
+            <form method="POST" action="index.php?page=cart" id="form-quantity">
                 <table>
                     <thead>
                         <tr>
@@ -72,7 +72,7 @@
                                 </td>
                                 <td><?= number_format($sousTotal, 2, ',', ' ') ?> €</td>
                                 <td>
-                                    <a href="/cart.php?del=<?= $product['id_article'] ?>">Supprimer</a>
+                                    <a href="index.php?page=cart&del=<?= $product['id_article'] ?>">Supprimer</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

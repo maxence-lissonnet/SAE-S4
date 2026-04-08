@@ -63,7 +63,7 @@
                     </div>
 
                     <?php if ($product['stock_article'] != 0): ?>
-                        <a class="addCart" href="index.php?page=add_cart&id=<?= $product['id_article'] ?>">Ajouter au panier</a>
+                        <a class="addCart" id="add-to-cart-button" href="index.php?page=add_cart&id=<?= $product['id_article'] ?>">Ajouter au panier</a>
                     <?php else: ?>
                         <button disabled>Épuisé</button>
                     <?php endif; ?>
