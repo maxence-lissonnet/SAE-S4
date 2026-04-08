@@ -17,7 +17,7 @@
             <details <?= !empty($filters) ? 'open' : '' ?>>
                 <summary>Cat&eacute;gories</summary>
                 <fieldset>
-                    <?php foreach (['Sucr&eacute;', 'Sal&eacute;', 'Boisson', 'Merch'] as $cat): ?>
+                    <?php foreach (['Sucré', 'Salé', 'Boisson', 'Merch'] as $cat) : ?>
                         <label>
                             <input type="checkbox" name="category[]" value="<?= $cat ?>" <?= in_array($cat, $filters, true) ? 'checked' : '' ?>> <?= $cat ?>
                         </label><br>
@@ -40,13 +40,9 @@
         </div>
     </div>
 
-    <p id="message-reduc">
-        * Articles non &eacute;ligibles aux r&eacute;ductions de grade
-    </p>
-
-    <?php if (!empty($products)): ?>
-        <div id="product-list">
-            <?php foreach ($products as $product): ?>
+    <div id="product-list">
+        <?php if (!empty($products)) : ?>
+            <?php foreach ($products as $product) : ?>
                 <div id="one-product">
                     <div>
                         <img src="<?= htmlspecialchars($product['resolved_image_article']) ?>" alt="<?= htmlspecialchars($product['nom_article']) ?>">
@@ -69,10 +65,10 @@
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <p>Aucun produit trouv&eacute;.</p>
-    <?php endif; ?>
+        <?php else : ?>
+            <p>Aucun produit trouvé.</p>
+        <?php endif; ?>
+    </div>
 
     <?php require_once 'footerVue.php'; ?>
     <script src="scripts/add_cart.js"></script>

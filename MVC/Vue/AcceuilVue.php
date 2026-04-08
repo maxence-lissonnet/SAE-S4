@@ -79,7 +79,7 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
             <div id="podium">
                 <?php
 
-                foreach ([2, 1, 3] as $member_number):
+                foreach ([2, 1, 3] as $member_number) :
                     $pod = $podium[$member_number - 1];
 
                 ?>
@@ -99,7 +99,7 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
         <section>
             <div class="events-display">
                 <?php
-                foreach ($events_to_display as $event):
+                foreach ($events_to_display as $event) :
                     $eventid = $event["id_evenement"]; ?>
 
                     <div class="event" event-id="<?php echo $eventid; ?>">

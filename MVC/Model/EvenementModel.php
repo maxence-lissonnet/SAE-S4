@@ -23,7 +23,7 @@ class EvenementModel
 
     public function get_evenement_a_venir()
     {
-        $stmt = $this->db->prepare("SELECT id_evenement, nom_evenement, lieu_evenement, date_evenement FROM EVENEMENT WHERE date_evenement >= CURDATE() ORDER BY date_evenement ASC ;");
+        $stmt = $this->db->prepare("SELECT id_evenement, nom_evenement, lieu_evenement, date_evenement FROM EVENEMENT WHERE date_evenement >= CURDATE() ORDER BY date_evenement DESC ;");
         $stmt->execute([]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -48,7 +48,6 @@ class EvenementModel
         $stmt->execute([$eventid, $userid]);
         return $stmt->fetch(PDO::FETCH_ASSOC)['isInscrit'];
     }
-
 
     public function get_event_by_id($eventid)
     {

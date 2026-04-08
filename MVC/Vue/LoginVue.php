@@ -14,7 +14,7 @@
     <form method="POST" action="index.php?page=login" class="login-form">
         <h1>Connexion</h1>
 
-        <?php if ($error): ?>
+        <?php if ($error) : ?>
             <h3 class="login-error"><?= htmlspecialchars($error) ?></h3>
         <?php endif; ?>
 

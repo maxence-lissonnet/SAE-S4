@@ -28,11 +28,11 @@
         <div>
             <h2><?php echo date('d/m/Y', strtotime($event['date_evenement'])); ?></h2>
 
-            <?php if ($event_date < $current_date): ?>
-                <button class="subscription" id="passed_subscription">Passe</button>
-            <?php elseif ($isSubscribed): ?>
+            <?php if ($event_date < $current_date) : ?>
+                <button class="subscription" id="passed_subscription">Passé</button>
+            <?php elseif ($isSubscribed) : ?>
                 <button class="subscription" id="passed_subscription">Inscrit</button>
-            <?php else: ?>
+            <?php else : ?>
                 <form class="subscription" action="index.php?page=event_inscription" method="post">
                     <input type="hidden" name="eventid" value="<?php echo $eventid; ?>">
                     <button type="submit">Inscription</button>
@@ -41,10 +41,16 @@
         </div>
 
         <ul>
-            <li><h3><?php echo htmlspecialchars($event['lieu_evenement']); ?></h3></li>
-            <li><h3><?php echo $event['prix_evenement']; ?> EUR par personne</h3></li>
-            <?php if ($event['reductions_evenement']): ?>
-                <li><h3>-10% pour les membres Diamants</h3></li>
+            <li>
+                <h3>📍 <?php echo htmlspecialchars($event['lieu_evenement']); ?></h3>
+            </li>
+            <li>
+                <h3>💸 <?php echo $event['prix_evenement']; ?>€ par personne</h3>
+            </li>
+            <?php if ($event['reductions_evenement']) : ?>
+                <li>
+                    <h3>💎 -10% pour les membres Diamants</h3>
+                </li>
             <?php endif; ?>
         </ul>
 
@@ -53,7 +59,7 @@
 
     <section class="gallery">
         <h2>GALERIE</h2>
-        <?php if ($isLoggedIn): ?>
+        <?php if ($isLoggedIn) : ?>
             <h3>Mes photos</h3>
             <div class="my-medias">
                 <?php foreach ($my_medias as $img): ?>
@@ -71,7 +77,7 @@
 
         <div class="show-more">
             <a href="?id=<?php echo $eventid; ?>&show=<?php echo $show + 8; ?>#gallery">Voir plus</a>
-            <?php if ($show > 8): ?>
+            <?php if ($show > 8) : ?>
                 <a href="?id=<?php echo $eventid; ?>&show=<?php echo max(8, $show - 8); ?>#gallery">Voir moins</a>
             <?php endif; ?>
         </div>
