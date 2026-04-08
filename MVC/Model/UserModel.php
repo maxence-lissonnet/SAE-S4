@@ -107,7 +107,11 @@ class UserModel
     //Supression du compte
     public function deleteAccount($userId)
     {
-        $stmt = $this->db->prepare("DELETE FROM MEMBRE WHERE id_membre = ?");
-        return $stmt->execute([$userId]);
+        $stmt1 = $this->db->prepare("DELETE FROM ADHESION WHERE id_membre = ?");
+        $stmt1->execute([$userId]);
+        $stmt2 = $this->db->prepare("DELETE FROM MEDIA WHERE id_membre = ?");
+        $stmt2->execute([$userId]);
+        $stmtFinal = $this->db->prepare("DELETE FROM MEMBRE WHERE id_membre = ?");
+        return $stmtFinal->execute([$userId]);
     }
 }
