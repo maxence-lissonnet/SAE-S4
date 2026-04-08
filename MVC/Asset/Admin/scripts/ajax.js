@@ -13,6 +13,12 @@ function getAppRoot() {
 }
 
 /**
+ * The base URL for the legacy admin API.
+ * @constant {string}
+ */
+const SERVER_API_URL = `${getAppRoot()}/Sans%20mvc/api`;
+
+/**
  * The unauthorized panel URL inside the MVC admin shell.
  * @constant {string}
  */
@@ -24,31 +30,8 @@ const UNAUTHORIZED_PANEL_URL = `${getAppRoot()}/MVC/index.php?page=admin_panel&p
 */
 const DEBUG_FETCHS = isDebug();
 
-function buildAdminApiUrl(endpoint) {
-    const normalizedEndpoint = String(endpoint).replace(/^\/+/, '');
-    const [resourcePath, queryString = ''] = normalizedEndpoint.split('?');
-    const resource = resourcePath.replace(/\.php$/i, '');
-    const url = new URL(`${window.location.origin}${getAppRoot()}/MVC/index.php`);
-
-    url.searchParams.set('page', 'admin_api');
-    url.searchParams.set('resource', resource);
-
-    if (queryString) {
-        const searchParams = new URLSearchParams(queryString);
-        searchParams.forEach((value, key) => {
-            url.searchParams.append(key, value);
-        });
-    }
-
-    if (DEBUG_FETCHS) {
-        url.searchParams.set('debug', '1');
-    }
-
-    return url.toString();
-}
-
 async function request(endpoint, method = 'GET', data = null, headers = {}) {
-    const url = buildAdminApiUrl(endpoint);
+    const url = SERVER_API_URL + endpoint;
 
     try {
         const options = {

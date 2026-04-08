@@ -43,13 +43,6 @@ export async function openFileDialog(accept = 'image/*') {
 }
 
 export function getFileBucketUrl(filename) {
-    let normalizedFilename = String(filename).trim();
-
-    if (/^https?:\/\//i.test(normalizedFilename)) {
-        normalizedFilename = new URL(normalizedFilename).pathname;
-    }
-
-    normalizedFilename = normalizedFilename.replace(/^\/+/, '');
-
-    return `${getAppRoot()}/MVC/index.php?page=admin_file&file=${encodeURIComponent(normalizedFilename)}`;
+    const normalizedFilename = String(filename).replace(/^\/+/, '');
+    return `${getAppRoot()}/Sans%20mvc/api/files/${encodeURI(normalizedFilename)}`;
 }
