@@ -13,7 +13,7 @@ class ActualiteModel
         $stmt = $this->db->prepare("SELECT id_actualite, titre_actualite, date_actualite 
                                     FROM ACTUALITE 
                                     WHERE date_actualite <= NOW() 
-                                    ORDER BY date_actualite ASC LIMIT ?");
+                                    ORDER BY date_actualite DESC LIMIT ?");
         $stmt->execute([$limit]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

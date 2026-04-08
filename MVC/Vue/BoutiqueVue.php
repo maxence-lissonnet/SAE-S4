@@ -22,7 +22,7 @@
             <details <?= !empty($filters) ? 'open' : '' ?>>
                 <summary>Catégories</summary>
                 <fieldset>
-                    <?php foreach (['Sucré', 'Salé', 'Boisson', 'Merch'] as $cat): ?>
+                    <?php foreach (['Sucré', 'Salé', 'Boisson', 'Merch'] as $cat) : ?>
                         <label>
                             <input type="checkbox" name="category[]" value="<?= $cat ?>" <?= in_array($cat, $filters) ? 'checked' : '' ?>> <?= $cat ?>
                         </label><br>
@@ -46,21 +46,21 @@
     </div>
 
     <div id="product-list">
-        <?php if (!empty($products)): ?>
-            <?php foreach ($products as $product): ?>
+        <?php if (!empty($products)) : ?>
+            <?php foreach ($products as $product) : ?>
                 <div id="one-product">
                     <img src="<?= $product['image_article'] ? 'api/files/' . $product['image_article'] : 'admin/ressources/default_images/boutique.png' ?>" alt="Article">
                     <h3><?= htmlspecialchars($product['nom_article']) ?></h3>
                     <p><?= number_format($product['prix_article'], 2, ',', ' ') ?> €</p>
 
-                    <?php if ($product['stock_article'] != 0): ?>
+                    <?php if ($product['stock_article'] != 0) : ?>
                         <a class="addCart" href="cart_add.php?id=<?= $product['id_article'] ?>">Ajouter au panier</a>
-                    <?php else: ?>
+                    <?php else : ?>
                         <button disabled>Épuisé</button>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
-        <?php else: ?>
+        <?php else : ?>
             <p>Aucun produit trouvé.</p>
         <?php endif; ?>
     </div>

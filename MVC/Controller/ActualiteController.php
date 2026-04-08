@@ -10,6 +10,7 @@ $news_list = $actualiteModel->get_actualites($show);
 
 $current_date = date("Y-m-d");
 $closest_found = false;
+$oldest_found = false;
 
 // Tableaux de traduction pour les dates
 $joursFr = [0 => 'Dimanche', 1 => 'Lundi', 2 => 'Mardi', 3 => 'Mercredi', 4 => 'Jeudi', 5 => 'Vendredi', 6 => 'Samedi'];
@@ -25,11 +26,29 @@ foreach ($news_list as $key => $news) {
 
     // Détermination de l'élément cible pour le scroll automatique
     $news_list[$key]['is_closest'] = false;
+    $news_list[$key]['is_oldest'] = false;
     if (!$closest_found) {
-        if ($news_date_raw >= $current_date || $key == count($news_list) - 1) {
+        if ($key == 0) {
             $news_list[$key]['is_closest'] = true;
             $closest_found = true;
         }
+    }
+    if (!$oldest_found) {
+        if ($key == count($news_list) - 2) { // -2 car sinon scroll trop bas
+            $news_list[$key]['is_oldest'] = true;
+            $oldest_found = true;
+        }
+    }
+}
+
+function is_special($news)
+{
+    if ($news['is_closest']) {
+        return 'closest-event';
+    } else if ($news['is_oldest']) {
+        return 'oldest-event';
+    } else {
+        return "";
     }
 }
 

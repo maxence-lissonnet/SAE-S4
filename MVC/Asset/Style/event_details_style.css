@@ -1,11 +1,13 @@
-section{
+section {
     margin-top: 4vh;
 }
-body{
+
+body {
     margin-left: 5vw;
     margin-right: 5vw;
 }
-footer{
+
+footer {
     margin-left: -5vw;
     margin-right: -5vw;
 }
@@ -14,12 +16,12 @@ footer{
 *******  EVENT  ******
 **********************/
 
-.event-details{
+.event-details {
     position: relative;
     width: 100%;
 }
 
-.event-details h1{
+.event-details h1 {
     font-family: "Koulen", sans-serif;
     font-size: 4.5em;
     letter-spacing: 15px;
@@ -29,7 +31,7 @@ footer{
     margin-bottom: 30px;
 }
 
-.event-details h2{
+.event-details h2 {
     margin-top: -10px;
     font-size: 3em;
     font-weight: 200;
@@ -41,7 +43,8 @@ footer{
     position: relative;
     z-index: 1;
 }
-.event-details > div{
+
+.event-details>div {
     margin-left: 8vw;
     margin-bottom: 20px;
     width: fit-content;
@@ -51,7 +54,7 @@ footer{
     gap: 30px;
 }
 
-.event-details img{
+.event-details img {
     position: absolute;
     border-radius: 15px;
 
@@ -66,49 +69,51 @@ footer{
     top: -20px;
 }
 
-.event-details button{
+.event-details button {
     width: 100%;
-    background-color: #4B0082; 
-    color: white; 
-    font-family: "Inter", sans-serif; 
-    font-size: 1.2em; 
-    font-weight: 500; 
-    border: none; 
-    border-radius: 15px; 
-    padding: 10px 30px; 
-    cursor: pointer; 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
+    background-color: #4B0082;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 30px;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
 .event-details button:hover {
-    background-color: #5A0099; 
-    transform: scale(1.05); 
-}
-
-#passed_subscription{
-    background-color: #757a76;
-    cursor: default;
-}
-#passed_subscription:hover {
-    background-color: #757a76; 
+    background-color: #5A0099;
     transform: scale(1.05);
 }
 
-.event-details li{
-    display: block;
-    line-height: 100px;
+#passed_subscription {
+    background-color: #757a76;
+    cursor: default;
 }
-.event-details li > div{
+
+#passed_subscription:hover {
+    background-color: #757a76;
+    transform: scale(1.05);
+}
+
+.event-details li {
+    display: block;
+    line-height: 50px;
+}
+
+.event-details li>div {
     display: flex;
     font-size: 2.2em;
 }
-.event-details li > div h3{
-    font-weight: 300;
+
+.event-details li>div h3 {
     margin-left: 20px;
 }
 
-.event-details p{
+.event-details p {
     width: 70%;
     font-size: 1.5em;
 
@@ -122,17 +127,17 @@ footer{
 
 
 /*********************
-*****  GALLERIE  *****
+*****   GALERIE  *****
 **********************/
 
-.gallery h2{
+.gallery h2 {
     font-family: "Koulen", sans-serif;
     font-size: 4.5em;
     letter-spacing: 15px;
     text-align: center;
 }
 
-.gallery h3{
+.gallery h3 {
     font-family: "Koulen", sans-serif;
     font-size: 2.5em;
     letter-spacing: 15px;
@@ -141,10 +146,10 @@ footer{
 }
 
 
-.my-medias{
+.my-medias {
     width: 1000px;
     height: 450px;
-    
+
     align-self: center;
     margin: 2vh auto;
     margin-bottom: 5vh;
@@ -157,7 +162,7 @@ footer{
     gap: 24px;
 }
 
-.my-medias img{
+.my-medias img {
     object-fit: cover;
     border-radius: 15px;
     width: 100%;
@@ -165,60 +170,62 @@ footer{
     aspect-ratio: 1/1;
 }
 
-.my-medias > img{
+.my-medias>img {
     cursor: pointer;
-    transition: all 0.3s ease; /* Transition fluide */
+    transition: all 0.3s ease;
+    /* Transition fluide */
     border: 2px solid rgba(0, 0, 0, 0.3);
 }
 
-.my-medias > *:hover{
+.my-medias>*:hover {
     transform: scale(1.05);
 }
 
-.my-medias *:nth-child(1){
+.my-medias *:nth-child(1) {
     grid-column: span 5 / span 5;
     grid-row: span 5 / span 5;
 }
 
-.my-medias *:nth-child(2){
+.my-medias *:nth-child(2) {
     grid-column: span 3 / span 3;
     grid-row: span 3 / span 3;
     grid-column-start: 6;
 }
 
-.my-medias *:nth-child(3){
+.my-medias *:nth-child(3) {
     grid-column: span 3 / span 3;
     grid-row: span 3 / span 3;
     grid-column-start: 9;
 }
 
-.my-medias *:nth-child(4){
+.my-medias *:nth-child(4) {
     grid-column: span 2 / span 2;
     grid-row: span 2 / span 2;
     grid-column-start: 6;
     grid-row-start: 4;
 }
 
-.my-medias *:nth-child(5){
+.my-medias *:nth-child(5) {
     grid-column: span 2 / span 2;
     grid-row: span 2 / span 2;
     grid-column-start: 8;
     grid-row-start: 4;
 }
 
-.my-medias *:nth-child(6){
+.my-medias *:nth-child(6) {
     grid-column: span 2 / span 2;
     grid-row: span 2 / span 2;
     grid-column-start: 10;
     grid-row-start: 4;
 }
 
-#open-gallery, 
+#open-gallery,
 #add-media {
     width: 100%;
     height: 100%;
     border: none;
-    transition: all 0.3s ease; /* Transition fluide */
+    transition: all 0.3s ease;
+    /* Transition fluide */
 }
 
 #open-gallery img,
@@ -232,38 +239,39 @@ footer{
 }
 
 
-.general-medias{
+.general-medias {
     width: 100%;
-    height: fit-content; 
+    height: fit-content;
 
     display: flex;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
 
     align-items: center;
-    
+
     margin: 2vh auto;
     padding: 10px;
-    justify-content: space-evenly; 
+    justify-content: space-evenly;
     gap: 2vw;
 
 }
 
-.general-medias > *{
+.general-medias>* {
     margin: auto;
     margin-bottom: 30px;
 
     aspect-ratio: 1/1;
 
     cursor: pointer;
-    transition: all 0.3s ease; /* Transition fluide */
+    transition: all 0.3s ease;
+    /* Transition fluide */
 }
 
-.general-medias img{
+.general-medias img {
 
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 15px;
 
-    width: 300px;    
+    width: 300px;
 
     height: 300px;
     border-radius: 15px;
@@ -273,7 +281,7 @@ footer{
     cursor: pointer;
 }
 
-.general-medias > *:hover{
+.general-medias>*:hover {
     transform: scale(1.05);
 }
 
@@ -318,6 +326,6 @@ footer{
     transform: scale(0.98);
 }
 
-ul{
-    margin-bottom: 200px;
+ul {
+    margin: 100px 0;
 }

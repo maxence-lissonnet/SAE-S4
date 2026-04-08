@@ -56,18 +56,18 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
             <div id="podium">
                 <?php
 
-                foreach ([2, 1, 3] as $member_number):
+                foreach ([2, 1, 3] as $member_number) :
                     $pod = $podium[$member_number - 1];
 
-                ?>
+                    ?>
                     <div class="podium_unit">
                         <h3>#0<?php echo $member_number ?></h3>
                         <h4><?php echo $pod['prenom_membre']; ?></h4>
                         <div>
-                            <?php if ($pod['pp_membre'] == null): ?>
+                            <?php if ($pod['pp_membre'] == null) : ?>
                                 <img src="admin/ressources/default_images/user.jpg" alt="Profile Picture"
                                     class="profile_picture">
-                            <?php else: ?>
+                            <?php else : ?>
                                 <img src="api/files/<?php echo $pod['pp_membre']; ?>" alt="Profile Picture"
                                     class="profile_picture">
                             <?php endif ?>
@@ -81,7 +81,7 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
         <section>
             <div class="events-display">
                 <?php
-                foreach ($events_to_display as $event):
+                foreach ($events_to_display as $event) :
                     $eventid = $event["id_evenement"]; ?>
 
                     <div class="event" event-id="<?php echo $eventid; ?>">

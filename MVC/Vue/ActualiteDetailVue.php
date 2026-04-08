@@ -16,9 +16,9 @@
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
 
     <section class="event-details">
-        <?php if (empty($actualite['image_actualite'])): ?>
+        <?php if (empty($actualite['image_actualite'])) : ?>
             <img src="admin/ressources/default_images/event.jpg" alt="Image par défaut">
-        <?php else: ?>
+        <?php else : ?>
             <img src="api/files/<?php echo htmlspecialchars($actualite['image_actualite']); ?>" alt="Image de l'actualité">
         <?php endif; ?>
 
