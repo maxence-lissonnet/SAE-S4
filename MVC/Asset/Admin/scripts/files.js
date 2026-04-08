@@ -1,3 +1,11 @@
+function getAppRoot() {
+    const marker = '/MVC/index.php';
+    const path = window.location.pathname;
+    const markerIndex = path.indexOf(marker);
+
+    return markerIndex === -1 ? '' : path.slice(0, markerIndex);
+}
+
 export async function getFullFilepath(filename, defaultFile) {
     if (!filename || filename === 'N/A') {
         return defaultFile;
@@ -35,5 +43,6 @@ export async function openFileDialog(accept = 'image/*') {
 }
 
 export function getFileBucketUrl(filename) {
-    return `../Sans mvc/api/files/${filename}`;
+    const normalizedFilename = String(filename).replace(/^\/+/, '');
+    return `${getAppRoot()}/Sans%20mvc/api/files/${encodeURI(normalizedFilename)}`;
 }

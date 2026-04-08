@@ -1,8 +1,28 @@
 /**
+ * Computes the application root from the current MVC index route.
+ * This keeps legacy admin calls working even when the panel is served through the MVC iframe route.
+ *
+ * @returns {string}
+ */
+function getAppRoot() {
+    const marker = '/MVC/index.php';
+    const path = window.location.pathname;
+    const markerIndex = path.indexOf(marker);
+
+    return markerIndex === -1 ? '' : path.slice(0, markerIndex);
+}
+
+/**
  * The base URL for the legacy admin API.
  * @constant {string}
  */
-const SERVER_API_URL = '../Sans mvc/api';
+const SERVER_API_URL = `${getAppRoot()}/Sans%20mvc/api`;
+
+/**
+ * The unauthorized panel URL inside the MVC admin shell.
+ * @constant {string}
+ */
+const UNAUTHORIZED_PANEL_URL = `${getAppRoot()}/MVC/index.php?page=admin_panel&panel=unauthorized`;
 
 /**
  * If true, the fetch requests are logged in the console.
@@ -47,7 +67,7 @@ async function request(endpoint, method = 'GET', data = null, headers = {}) {
         if (!response.ok) {
             if (json && json.error) {
                 if (json.error === 'Unauthorized' || json.error === 'Forbidden') {
-                    window.location.href = 'index.php?page=admin_panel&panel=unauthorized';
+                    window.location.href = UNAUTHORIZED_PANEL_URL;
                     return;
                 }
                 throw new Error(json.error);

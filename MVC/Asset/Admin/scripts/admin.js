@@ -4,8 +4,13 @@ const initialPanel = document.body.dataset.initialPanel;
 
 const debug = isDebug();
 
-function getPanelUrl(panel) {
-    let url = `index.php?page=admin_panel&panel=${encodeURIComponent(panel)}`;
+function getMvcAdminUrl(panel) {
+    const marker = '/MVC/index.php';
+    const path = window.location.pathname;
+    const markerIndex = path.indexOf(marker);
+    const appRoot = markerIndex === -1 ? '' : path.slice(0, markerIndex);
+
+    let url = `${appRoot}/MVC/index.php?page=admin_panel&panel=${encodeURIComponent(panel)}`;
     if (debug) {
         url += '&debug=1';
     }
@@ -23,7 +28,7 @@ listItems.forEach(item => {
     item.addEventListener('click', () => {
         listItems.forEach(li => li.classList.remove('selected'));
         item.classList.add('selected');
-        content.src = getPanelUrl(item.getAttribute('perm'));
+        content.src = getMvcAdminUrl(item.getAttribute('perm'));
     });
 });
 
