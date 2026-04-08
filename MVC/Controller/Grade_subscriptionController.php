@@ -2,38 +2,34 @@
 
 // Importer les fichiers
 require_once __DIR__ . "/../Model/GradeModel.php";
+require_once 'files_save.php'; // Garde-le si tu as besoin des fonctions de fichiers
 
 $gradeSubscriptionModel = new GradeModel($db);
-require_once 'files_save.php';
 
-// Connexion à la base de données
-
+// Sécurité
 $isLoggedIn = isset($_SESSION["userid"]);
 if (!$isLoggedIn) {
-    header("Location: login.php");
+    header("Location: index.php?page=login"); // CORRECTION DU ROUTEUR
     exit;
 }
 
 $userid = $_SESSION["userid"];
 
-
 // Vérification que l'ID du grade est fourni dans l'URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header("Location: grade.php");
+    header("Location: index.php?page=grade"); // CORRECTION DU ROUTEUR
     exit;
 }
 $id_grade = intval($_GET['id']);
 
-
 // On récupère les informations du grade
 $grade = $gradeSubscriptionModel->getGradeById($id_grade);
-
 
 // Vérifie que le grade existe
 if (empty($grade)) {
     $_SESSION['message'] = "Le grade sélectionné n'existe pas.";
     $_SESSION['message_type'] = "error";
-    header("Location: grade.php");
+    header("Location: index.php?page=grade"); // CORRECTION DU ROUTEUR
     exit;
 }
 
@@ -47,12 +43,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($currentGrade)) {
             $gradeSubscriptionModel->unsubscribeFromGrade($userid);
         }
-        $gradeSubscriptionModel->subscribeToGrade($userid, $id_grade, $grade[0]['prix_grade'], $mode_paiement);
+
+        // CORRECTION DU [0] ICI : On utilise $grade['prix_grade']
+        $gradeSubscriptionModel->subscribeToGrade($userid, $id_grade, $grade['prix_grade'], $mode_paiement);
 
         $_SESSION['message'] = "Adhésion au grade réussie !";
         $_SESSION['message_type'] = "success";
-        header("Location: grade.php");
+        header("Location: index.php?page=grade"); // CORRECTION DU ROUTEUR
         exit;
-    } else {
     }
 }
+
+// Appel de la vue
+require_once __DIR__ . '/../Vue/Grade_subscriptionVue.php';

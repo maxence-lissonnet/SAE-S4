@@ -29,7 +29,7 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
                     <?php if ($product['owned']): ?>
                         <button disabled>Déjà détenu</button>
                     <?php else: ?>
-                        <a href="grade_subscription.php?id=<?= $product['id_grade'] ?>">Acheter</a>
+                        <a href="index.php?page=grade_subscription&id=<?= $product['id_grade'] ?>">Acheter</a>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>

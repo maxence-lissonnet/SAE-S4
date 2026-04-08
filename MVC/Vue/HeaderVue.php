@@ -35,7 +35,11 @@
 
             <?php if ($isUserLoggedIn) : ?>
                 <li>
-                    <a href="agenda.php">Agenda</a>
+                    <a href="index.php?page=agenda">Agenda</a>
+                </li>
+
+                <li>
+                    <a href="index.php?page=my_gallery">Ma Galerie</a>
                 </li>
             <?php endif; ?>
 
@@ -45,7 +49,7 @@
 
             <?php if ($isUserLoggedIn) : ?>
                 <li>
-                    <a href="account.php">Mon compte</a>
+                    <a href="index.php?page=account">Mon compte</a>
                 </li>
 
                 <?php if ($isAdmin) : ?>
@@ -56,7 +60,7 @@
 
             <?php else : ?>
                 <li>
-                    <a href="login.php">Se connecter</a>
+                    <a href="index.php?page=login">Se connecter</a>
                 </li>
             <?php endif; ?>
 

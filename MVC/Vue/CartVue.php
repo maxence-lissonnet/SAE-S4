@@ -99,7 +99,7 @@
         </div>
 
         <div>
-            <form class="subscription" action="/order.php" method="post">
+            <form class="subscription" action="index.php?page=order" method="post">
                 <input type="hidden" name="cart" value="<?= htmlspecialchars(json_encode($_SESSION['cart'], JSON_UNESCAPED_UNICODE)) ?>">
 
                 <button type="submit" id='order-button'>
