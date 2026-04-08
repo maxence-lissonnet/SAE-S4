@@ -25,7 +25,7 @@ async function fetchData() {
     // Fetch data
     let actualites = [];
     try{
-        actualites = await requestGET('/news.php');
+        actualites = await requestGET('news');
     } catch (error) {
         toast('Erreur lors du chargement des actualites.', true);
     }
@@ -55,7 +55,7 @@ async function saveNews(id_news){
 
     // Send data
     try {
-        await requestPUT('/news.php?id=' + id_news.toString(), data);
+        await requestPUT('news&id=' + id_news.toString(), data);
         toast('Actualité mis à jour avec succès.');
         selectNews(id_news);
     } catch (error) {
@@ -76,7 +76,7 @@ async function deleteNews(id_news){
     showLoader();
 
     // Send request
-    await requestDELETE(`/news.php?id=${id_news}`);
+    await requestDELETE(`news&id=${id_news}`);
     
     /// Update navbar
     refreshNavbar(fetchData, selectNews);
@@ -101,7 +101,7 @@ async function selectNews(id_news, li){
     showLoader();
 
     // Fetch news information
-    const news = await requestGET(`/news.php?id=${id_news}`);
+    const news = await requestGET(`news&id=${id_news}`);
 
     // Update displayed information
     if (news.image_actualite) {
@@ -154,7 +154,7 @@ async function selectNews(id_news, li){
 
         // Send data
         try {
-            await requestPATCH('/news.php?id=' + id_news.toString(), image);
+            await requestPATCH('news&id=' + id_news.toString(), image);
             toast('Image mis à jour avec succès.');
         } catch (error) {
             toast(error.message, true);
@@ -181,7 +181,7 @@ new_btn.onclick = async ()=>{
 
     // Create new news
     try {
-        const { id_actualite } = await requestPOST('/news.php');
+        const { id_actualite } = await requestPOST('news');
         refreshNavbar(fetchData, selectNews, id_actualite);
     } catch (error) {
         toast("Erreur lors de la création de l'actualtié", true);

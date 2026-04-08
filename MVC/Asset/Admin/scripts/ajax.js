@@ -2,7 +2,7 @@
  * The base URL for the legacy admin API.
  * @constant {string}
  */
-const SERVER_API_URL = '../Sans mvc/api';
+const SERVER_API_URL = '../../../index.php?page=api_';
 
 /**
  * If true, the fetch requests are logged in the console.

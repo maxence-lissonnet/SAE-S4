@@ -24,4 +24,35 @@ class ActualiteModel
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getAllNewsAdmin()
+    {
+        $stmt = $this->db->query("SELECT * FROM ACTUALITE ORDER BY date_actualite DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function createEmptyNews()
+    {
+        $stmt = $this->db->prepare("INSERT INTO ACTUALITE (titre_actualite, contenu_actualite, date_actualite) VALUES ('Nouvelle actualité', 'Contenu par défaut', NOW())");
+        $stmt->execute();
+        return $this->db->lastInsertId();
+    }
+
+    public function updateNews($id, $titre, $contenu, $date)
+    {
+        $stmt = $this->db->prepare("UPDATE ACTUALITE SET titre_actualite = ?, contenu_actualite = ?, date_actualite = ? WHERE id_actualite = ?");
+        return $stmt->execute([$titre, $contenu, $date, $id]);
+    }
+
+    public function updateNewsImage($id, $filename)
+    {
+        $stmt = $this->db->prepare("UPDATE ACTUALITE SET image_actualite = ? WHERE id_actualite = ?");
+        return $stmt->execute([$filename, $id]);
+    }
+
+    public function deleteNews($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM ACTUALITE WHERE id_actualite = ?");
+        return $stmt->execute([$id]);
+    }
 }

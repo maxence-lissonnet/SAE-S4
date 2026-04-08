@@ -33,7 +33,7 @@ async function fetchData() {
     // Fetch data
     let roles = [];
     try{
-        roles = await requestGET('/role.php');
+        roles = await requestGET('role');
     } catch (error) {
         toast(error.message, true);
     }
@@ -75,7 +75,7 @@ async function saveRole(id_role){
 
     // Send data
     try {
-        await requestPUT('/role.php?id=' + id_role.toString(), data);
+        await requestPUT('role&id=' + id_role.toString(), data);
         toast('Role mis à jour avec succès.');
         selectRole(id_role);
     } catch (error) {
@@ -96,7 +96,7 @@ async function deleteRole(id_role){
     showLoader();
 
     // Send request
-    await requestDELETE(`/role.php?id=${id_role}`);
+    await requestDELETE(`role&id=${id_role}`);
     
     /// Update navbar
     refreshNavbar(fetchData, selectRole);
@@ -121,7 +121,7 @@ async function selectRole(id_role, li){
     showLoader();
 
     // Fetch grade information
-    const role = await requestGET(`/role.php?id=${id_role}`);
+    const role = await requestGET(`role&id=${id_role}`);
 
     // Update displayed information
     prop_nom_role.value = role.nom_role;
@@ -180,7 +180,7 @@ new_btn.onclick = async ()=>{
 
     // Create new grade
     try {
-        const { id_role } = await requestPOST('/role.php');
+        const { id_role } = await requestPOST('role');
         refreshNavbar(fetchData, selectRole, id_role);
     } catch (error) {
         toast(error.message, true);

@@ -27,7 +27,7 @@ async function fetchData() {
     // Fetch data
     let users = [];
     try{
-        users = await requestGET('/users.php');
+        users = await requestGET('users');
     } catch (error) {
         toast('Erreur lors du chargement des utilisateurs.', true);
     }
@@ -63,9 +63,9 @@ async function saveUser(id_user){
 
     // Send data
     try {
-        await requestPUT('/users.php?id=' + id_user.toString(), data);
+        await requestPUT('users&id=' + id_user.toString(), data);
         const roles = {roles: Array.from(prop_roles.children).filter(role => role.classList.contains('selected')).map(role => parseInt(role.getAttribute('id')))}
-        await requestPUT('/userole.php?id=' + id_user.toString(), roles);
+        await requestPUT('users&id=' + id_user.toString(), roles);
         toast('Utiliateur mis à jour avec succès.');
         selectUser(id_user);
     } catch (error) {
@@ -86,7 +86,7 @@ async function deleteUser(id_user){
     showLoader();
 
     // Send request
-    await requestDELETE(`/users.php?id=${id_user}`);
+    await requestDELETE(`users&id=${id_user}`);
     
     /// Update navbar
     refreshNavbar(fetchData, selectUser);
@@ -111,7 +111,7 @@ async function selectUser(id_member, li){
     showLoader();
 
     // Fetch grade information
-    const user = await requestGET(`/users.php?id=${id_member}`);
+    const user = await requestGET(`users&id=${id_member}`);
 
     // Update displayed information
     prop_img.src = await getFullFilepath(user.pp_membre, '../ressources/default_images/user.jpg');
@@ -164,7 +164,7 @@ async function selectUser(id_member, li){
 
         // Send data
         try {
-            await requestPATCH('/users.php?id=' + id_member.toString(), image);
+            await requestPATCH('users&id=' + id_member.toString(), image);
             toast('Image mis à jour avec succès.');
         } catch (error) {
             toast(error.message, true);
@@ -180,8 +180,8 @@ async function selectUser(id_member, li){
         prop_roles.removeChild(prop_roles.firstChild);
 
     // Add roles
-    const roles = await requestGET('/role.php'); // Get all roles
-    const user_roles = (await requestGET(`/userole.php?id=${id_member}`)).map(role => role.id_role); // Get user roles;
+    const roles = await requestGET('role'); // Get all roles
+    const user_roles = user.roles;
     roles.forEach(role => {
 
         // Create role button
@@ -224,7 +224,7 @@ new_btn.onclick = async ()=>{
 
     // Create new user
     try {
-        const { id_membre } = await requestPOST('/users.php');
+        const { id_membre } = await requestPOST('users');
         refreshNavbar(fetchData, selectUser, id_membre);
     } catch (error) {
         toast(error.message, true);

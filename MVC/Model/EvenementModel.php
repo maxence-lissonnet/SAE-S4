@@ -95,4 +95,41 @@ class EvenementModel
         $stmt = $this->db->prepare("UPDATE MEMBRE SET xp_membre = xp_membre + ? WHERE id_membre = ?");
         $stmt->execute([$xp, $userid]);
     }
+
+    public function getAllEvents()
+    {
+        $stmt = $this->db->query("SELECT * FROM EVENEMENT ORDER BY date_evenement DESC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function createEmptyEvent()
+    {
+        $stmt = $this->db->prepare("INSERT INTO EVENEMENT (nom_evenement, description_evenement, xp_evenement, places_evenement, prix_evenement, lieu_evenement, date_evenement, reductions_evenement) VALUES ('Nouvel événement', '', 10, -1, 0, '', NOW(), 1)");
+        $stmt->execute();
+        return $this->db->lastInsertId();
+    }
+
+    public function updateEvent($id, $nom, $desc, $xp, $places, $prix, $lieu, $date, $reductions)
+    {
+        $stmt = $this->db->prepare("UPDATE EVENEMENT SET nom_evenement = ?, description_evenement = ?, xp_evenement = ?, places_evenement = ?, prix_evenement = ?, lieu_evenement = ?, date_evenement = ?, reductions_evenement = ? WHERE id_evenement = ?");
+        return $stmt->execute([$nom, $desc, $xp, $places, $prix, $lieu, $date, $reductions, $id]);
+    }
+
+    public function updateEventImage($id, $filename)
+    {
+        $stmt = $this->db->prepare("UPDATE EVENEMENT SET image_evenement = ? WHERE id_evenement = ?");
+        return $stmt->execute([$filename, $id]);
+    }
+
+    public function deleteEvent($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM EVENEMENT WHERE id_evenement = ?");
+        return $stmt->execute([$id]);
+    }
+
+    public function deleteItemsByEventId($eventId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM ARTICLE WHERE id_evenement = ?");
+        return $stmt->execute([$eventId]);
+    }
 }

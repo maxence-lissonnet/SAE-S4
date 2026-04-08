@@ -21,7 +21,7 @@ async function updateView(){
     addUpdloadButton();
 
     // Fetch data
-    const data = await requestGET('/accounting.php');
+    const data = await requestGET('accounting');
 
     // Add elements
     for (let i = 0; i < data.length; i++) {
@@ -84,7 +84,7 @@ function addAccountingElement(data){
         }).then(async (willDelete) => {
             if (willDelete) {
                 try {
-                    await requestDELETE(`/accounting.php?id=${data.id_comptabilite}`);
+                    await requestDELETE(`accounting&id=${data.id_comptabilite}`);
                     toast("Fichier supprimé avec succès.");
                     updateView();
                 } catch (error) {
@@ -146,7 +146,7 @@ async function uploadFile(file, name, date){
 
     // Send request
     try{
-        await requestPOST('/accounting.php', form_data);
+        await requestPOST('accounting', form_data);
         toast("Fichier uploadé avec succès");
         updateView();
     } catch (error) {

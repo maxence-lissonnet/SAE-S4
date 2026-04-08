@@ -31,7 +31,7 @@ async function fetchData() {
     // Fetch data
     let events = [];
     try{
-        events = await requestGET('/event.php');
+        events = await requestGET('event');
     } catch (error) {
         toast('Erreur lors du chargement des evenements.', true);
     }
@@ -66,7 +66,7 @@ async function saveEvent(id_event){
 
     // Send data
     try {
-        await requestPUT('/event.php?id=' + id_event.toString(), data);
+        await requestPUT('event&id=' + id_event.toString(), data);
         toast('Evenement mis à jour avec succès.');
         selectEvent(id_event);
     } catch (error) {
@@ -87,7 +87,7 @@ async function deleteEvent(id_event){
     showLoader();
 
     // Send request
-    await requestDELETE(`/event.php?id=${id_event}`);
+    await requestDELETE(`event&id=${id_event}`);
     
     /// Update navbar
     refreshNavbar(fetchData, selectEvent);
@@ -112,7 +112,7 @@ async function selectEvent(id_event, li){
     showLoader();
 
     // Fetch event information
-    const event = await requestGET(`/event.php?id=${id_event}`);
+    const event = await requestGET(`event&id=${id_event}`);
 
     // Update displayed information
     prop_image.src = await getFullFilepath(event.image_evenement, '../ressources/default_images/event.jpg');
@@ -166,7 +166,7 @@ async function selectEvent(id_event, li){
 
         // Send data
         try {
-            await requestPATCH('/event.php?id=' + id_event.toString(), image);
+            await requestPATCH('event&id=' + id_event.toString(), image);
             toast('Image mis à jour avec succès.');
         } catch (error) {
             toast(error.message, true);
@@ -193,7 +193,7 @@ new_btn.onclick = async ()=>{
 
     // Create new event
     try {
-        const { id_evenement } = await requestPOST('/event.php');
+        const { id_evenement } = await requestPOST('event');
         refreshNavbar(fetchData, selectEvent, id_evenement);
     } catch (error) {
         toast("Erreur lors de la création de l'évenement", true);

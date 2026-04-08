@@ -108,7 +108,47 @@ switch ($page) {
         break;
 
     case 'order':
-        require_once 'Controller/OrderController.php';
+        require_once __DIR__ . '/Controller/OrderController.php';
+        break;
+
+    case 'api_item':
+        require_once __DIR__ . '/Controller/ApiItemController.php';
+        break;
+
+    case 'api_event':
+        require_once __DIR__ . '/Controller/ApiEventController.php';
+        break;
+
+    case 'api_users':
+        require_once __DIR__ . '/Controller/ApiUserController.php';
+        break;
+
+    case 'api_grade':
+        require_once __DIR__ . '/Controller/ApiGradeController.php';
+        break;
+
+    case 'api_accounting':
+        require_once __DIR__ . '/Controller/ApiComptabiliteController.php';
+        break;
+
+    case 'api_meeting':
+        require_once __DIR__ . '/Controller/ApiMeetingController.php';
+        break;
+
+    case 'api_role':
+        require_once __DIR__ . '/Controller/ApiRoleController.php';
+        break;
+
+    case 'api_news':
+        require_once __DIR__ . '/Controller/ApiActualiteController.php';
+        break;
+
+    case 'api_purchase':
+        require_once __DIR__ . '/Controller/ApiPurchaseController.php';
+        break;
+
+    case 'api_logs':
+        require_once __DIR__ . '/Controller/ApiLogController.php';
         break;
 
     default:

@@ -110,4 +110,50 @@ class UserModel
         $stmt = $this->db->prepare("DELETE FROM MEMBRE WHERE id_membre = ?");
         return $stmt->execute([$userId]);
     }
+
+    public function getAllUsers()
+    {
+        $stmt = $this->db->query("SELECT id_membre, nom_membre, prenom_membre, email_membre, xp_membre, tp_membre FROM MEMBRE ORDER BY nom_membre ASC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->db->prepare("SELECT id_membre, nom_membre, prenom_membre, email_membre, xp_membre, tp_membre, pp_membre FROM MEMBRE WHERE id_membre = ?");
+        $stmt->execute([$id]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $stmtRoles = $this->db->prepare("SELECT id_role FROM ASSIGNATION WHERE id_membre = ?");
+            $stmtRoles->execute([$id]);
+            $user['roles'] = $stmtRoles->fetchAll(PDO::FETCH_COLUMN);
+        }
+
+        return $user;
+    }
+
+    public function updateUserAdmin($id, $nom, $prenom, $email, $tp, $xp, $roles)
+    {
+        $stmt = $this->db->prepare("UPDATE MEMBRE SET nom_membre = ?, prenom_membre = ?, email_membre = ?, tp_membre = ?, xp_membre = ? WHERE id_membre = ?");
+        $stmt->execute([$nom, $prenom, $email, $tp, $xp, $id]);
+
+        $stmtDel = $this->db->prepare("DELETE FROM ASSIGNATION WHERE id_membre = ?");
+        $stmtDel->execute([$id]);
+
+        if (!empty($roles)) {
+            $stmtIns = $this->db->prepare("INSERT INTO ASSIGNATION (id_membre, id_role) VALUES (?, ?)");
+            foreach ($roles as $roleId) {
+                $stmtIns->execute([$id, $roleId]);
+            }
+        }
+
+        return true;
+    }
+
+    public function createEmptyUser()
+    {
+        $stmt = $this->db->prepare("INSERT INTO MEMBRE (nom_membre, prenom_membre, email_membre, xp_membre, tp_membre, password_membre) VALUES ('N/A', 'N/A', 'N/A', 0, '', 'admin_temp')");
+        $stmt->execute();
+        return $this->db->lastInsertId();
+    }
 }

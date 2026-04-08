@@ -69,4 +69,35 @@ class GradeModel
         $stmtInsert = $this->db->prepare("INSERT INTO ADHESION (id_membre, id_grade, prix_adhesion, paiement_adhesion, date_adhesion) VALUES (?, ?, ?, ?, NOW())");
         return $stmtInsert->execute([$userId, $gradeId, $price, $paymentMode]);
     }
+
+    public function getAllGradesAdmin()
+    {
+        $stmt = $this->db->query("SELECT * FROM GRADE ORDER BY prix_grade ASC");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function createEmptyGrade()
+    {
+        $stmt = $this->db->prepare("INSERT INTO GRADE (nom_grade, description_grade, prix_grade, reduction_grade) VALUES ('Nouveau grade', 'Description par défaut', 0, 0)");
+        $stmt->execute();
+        return $this->db->lastInsertId();
+    }
+
+    public function updateGrade($id, $nom, $desc, $prix, $reduction)
+    {
+        $stmt = $this->db->prepare("UPDATE GRADE SET nom_grade = ?, description_grade = ?, prix_grade = ?, reduction_grade = ? WHERE id_grade = ?");
+        return $stmt->execute([$nom, $desc, $prix, $reduction, $id]);
+    }
+
+    public function updateGradeImage($id, $filename)
+    {
+        $stmt = $this->db->prepare("UPDATE GRADE SET image_grade = ? WHERE id_grade = ?");
+        return $stmt->execute([$filename, $id]);
+    }
+
+    public function deleteGrade($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM GRADE WHERE id_grade = ?");
+        return $stmt->execute([$id]);
+    }
 }

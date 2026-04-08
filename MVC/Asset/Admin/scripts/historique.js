@@ -11,7 +11,7 @@ const toggle_events = document.getElementById('toggle_events');
 const userSearch = document.getElementById('userSearch');
 
 // Values
-const default_data = await requestGET('/purchase.php');
+const default_data = await requestGET('purchase');
 default_data.forEach(item => {
     item.user = item.nom_membre.toUpperCase() + ' ' + item.prenom_membre;
 });

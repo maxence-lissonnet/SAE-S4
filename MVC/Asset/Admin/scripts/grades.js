@@ -26,7 +26,7 @@ async function fetchData() {
     // Fetch data
     let grades = [];
     try{
-        grades = await requestGET('/grade.php');
+        grades = await requestGET('grade');
     } catch (error) {
         toast('Erreur lors du chargement des grades.', true);
     }
@@ -58,7 +58,7 @@ async function saveGrade(id_grade){
 
     // Send data
     try {
-        await requestPUT('/grade.php?id=' + id_grade.toString(), data);
+        await requestPUT('grade&id=' + id_grade.toString(), data);
         toast('Grade mis à jour avec succès.');
         selectGrade(id_grade);
     } catch (error) {
@@ -79,7 +79,7 @@ async function deleteGrade(id_grade){
     showLoader();
 
     // Send request
-    await requestDELETE(`/grade.php?id=${id_grade}`);
+    await requestDELETE(`grade&id=${id_grade}`);
     
     /// Update navbar
     refreshNavbar(fetchData, selectGrade);
@@ -104,7 +104,7 @@ async function selectGrade(id_grade, li){
     showLoader();
 
     // Fetch grade information
-    const grade = await requestGET(`/grade.php?id=${id_grade}`);
+    const grade = await requestGET(`grade&id=${id_grade}`);
 
     // Update displayed information
     prop_image_grade.src = await getFullFilepath(grade.image_grade, '../ressources/default_images/grade.webp');
@@ -154,7 +154,7 @@ async function selectGrade(id_grade, li){
 
         // Send data
         try {
-            await requestPATCH('/grade.php?id=' + id_grade.toString(), image);
+            await requestPATCH('grade&id=' + id_grade.toString(), image);
             toast('Image mis à jour avec succès.');
         } catch (error) {
             toast(error.message, true);
@@ -181,7 +181,7 @@ new_btn.onclick = async ()=>{
 
     // Create new grade
     try {
-        const id = await requestPOST('/grade.php');
+        const id = await requestPOST('grade');
         refreshNavbar(fetchData, selectGrade, id);
     } catch (error) {
         toast('Erreur lors de la création du grade.', true);
