@@ -16,7 +16,7 @@
 <!-- HEADER -->
 <header>
     <a id="accueil" href="index.php?page=accueil">
-        <img src="assets/logo.png" alt="Logo de l'ADIIL">
+        <img src="Asset/image/logo.png" alt="Logo de l'ADIIL">
     </a>
     <nav>
         <ul>

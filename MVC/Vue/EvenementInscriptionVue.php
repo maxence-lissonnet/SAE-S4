@@ -11,19 +11,19 @@
 <body class="body_margin">
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
 
-    <h1>RÉCAPITULATIF DE L'INSCRIPTION</h1>
+    <h1>RECAPITULATIF DE L'INSCRIPTION</h1>
 
     <div class="cart-container">
         <a href="index.php?page=evenementDetail&id=<?= $eventid ?>" class="back-link">
-            <img src="/assets/fleche_retour.png" alt="Retour"> Retourner à l'évènement
+            <img src="Asset/image/fleche_retour.png" alt="Retour"> Retourner a l'evenement
         </a>
 
         <table>
             <thead>
                 <tr>
                     <th>Article</th>
-                    <th>Quantité</th>
-                    <th>Prix Unitaire</th>
+                    <th>Quantite</th>
+                    <th>Prix unitaire</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -31,21 +31,21 @@
                 <tr>
                     <td><?= strtoupper(htmlspecialchars($title)) ?></td>
                     <td>1</td>
-                    <td><?= number_format($base_price, 2) ?> €</td>
-                    <td><?= number_format($base_price, 2) ?> €</td>
+                    <td><?= number_format($base_price, 2) ?> EUR</td>
+                    <td><?= number_format($base_price, 2) ?> EUR</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="totals">
-            <p>Total : <?= number_format($base_price, 2) ?> €</p>
-            <h3>Total après réductions : <?= number_format($final_price, 2) ?> €</h3>
+            <p>Total : <?= number_format($base_price, 2) ?> EUR</p>
+            <h3>Total apres reductions : <?= number_format($final_price, 2) ?> EUR</h3>
         </div>
 
         <div class="payment-section">
             <h3>Paiement</h3>
             <select id="mode_paiement">
-                <option value="carte_credit">Carte de Crédit</option>
+                <option value="carte_credit">Carte de credit</option>
                 <option value="paypal">PayPal</option>
             </select>
 
@@ -66,7 +66,7 @@
 
     <script>
         document.getElementById('mode_paiement').addEventListener('change', function() {
-            document.getElementById('fields_cc').style.display = (this.value === 'carte_credit') ? 'block' : 'none';
+            document.getElementById('fields_cc').style.display = this.value === 'carte_credit' ? 'block' : 'none';
         });
     </script>
 

@@ -14,13 +14,18 @@
 
 <body>
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
+    <?php
+    $resolveImage = static function ($path, $fallback = 'API/files/default-event.png') {
+        if (empty($path)) {
+            return $fallback;
+        }
+
+        return preg_match('#^https?://#i', $path) ? $path : 'API/files/' . ltrim($path, '/');
+    };
+    ?>
 
     <section class="event-details">
-        <?php if (empty($actualite['image_actualite'])): ?>
-            <img src="admin/ressources/default_images/event.jpg" alt="Image par défaut">
-        <?php else: ?>
-            <img src="api/files/<?php echo htmlspecialchars($actualite['image_actualite']); ?>" alt="Image de l'actualité">
-        <?php endif; ?>
+        <img src="<?php echo htmlspecialchars($resolveImage($actualite['image_actualite'])); ?>" alt="Image de l'actualite">
 
         <h1><?php echo strtoupper(htmlspecialchars($actualite['titre_actualite'])); ?></h1>
 
