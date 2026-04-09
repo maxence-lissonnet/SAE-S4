@@ -5,6 +5,12 @@
 
 <body class="body_margin">
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
+    <div
+        id="cart-toast"
+        aria-live="polite"
+        aria-atomic="true"
+        style="display:none; position:fixed; top:118px; right:32px; max-width:420px; min-width:240px; padding:12px 16px; border-radius:12px; background-color:rgba(64, 180, 141, 0.2); border:1px solid rgba(64, 180, 141, 0.8); color:rgb(182, 248, 224); font-weight:600; font-size:0.95rem; line-height:1.5; text-align:left; opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease; z-index:1201;"
+    ></div>
 
     <h1>LA BOUTIQUE</h1>
 
@@ -79,6 +85,7 @@
     </div>
 
     <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
+    <script src="Asset/Script/add_cart.js"></script>
 </body>
 
 </html>
