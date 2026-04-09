@@ -4,6 +4,14 @@ require_once __DIR__ . "/../Model/MembreModel.php";
 $membreModel = new MembreModel($db);
 
 $error = null;
+$flashMessage = null;
+$flashMessageType = null;
+
+if (isset($_SESSION['message'])) {
+    $flashMessage = $_SESSION['message'];
+    $flashMessageType = $_SESSION['message_type'] ?? 'success';
+    unset($_SESSION['message'], $_SESSION['message_type']);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = trim($_POST['mail']);

@@ -70,6 +70,10 @@ switch ($page) {
         require_once __DIR__ . "/Controller/LoginController.php";
         break;
 
+    case 'forgot_password':
+        require_once __DIR__ . "/Controller/ForgotPasswordController.php";
+        break;
+
     case 'signin':
         require_once __DIR__ . "/Controller/SigninController.php";
         break;

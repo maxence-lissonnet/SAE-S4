@@ -14,6 +14,12 @@
     <form method="POST" action="index.php?page=login" class="login-form">
         <h1>Connexion</h1>
 
+        <?php if ($flashMessage) : ?>
+            <h3 class="login-message <?= htmlspecialchars($flashMessageType === 'error' ? 'error' : 'success') ?>">
+                <?= htmlspecialchars($flashMessage) ?>
+            </h3>
+        <?php endif; ?>
+
         <?php if ($error) : ?>
             <h3 class="login-error"><?= htmlspecialchars($error) ?></h3>
         <?php endif; ?>
@@ -23,6 +29,8 @@
 
         <label for="password">Mot de passe :</label>
         <input type="password" name="password" id="password">
+
+        <a href="index.php?page=forgot_password" class="forgot-password-link">Mot de passe oublie ?</a>
 
         <button type="submit">Se connecter</button>
     </form>
