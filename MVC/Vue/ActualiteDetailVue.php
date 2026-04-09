@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($actualite['titre_actualite']); ?></title>
+    <title><?= htmlspecialchars($actualite['titre_actualite']) ?></title>
 
     <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/header_style.css">
@@ -14,35 +14,22 @@
 
 <body>
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
-    <?php
-    $resolveImage = static function ($path, $fallback = 'API/files/default-event.png') {
-        if (empty($path)) {
-            return $fallback;
-        }
-
-        return preg_match('#^https?://#i', $path) ? $path : 'API/files/' . ltrim($path, '/');
-    };
-    ?>
 
     <section class="event-details">
-        <?php if (empty($actualite['image_actualite'])) : ?>
-            <img src="admin/ressources/default_images/event.jpg" alt="Image par défaut">
-        <?php else : ?>
-            <img src="api/files/<?php echo htmlspecialchars($actualite['image_actualite']); ?>" alt="Image de l'actualité">
-        <?php endif; ?>
+        <img src="<?= htmlspecialchars($resolvedImageActualite) ?>" alt="Image de l'actualité">
 
-        <h1><?php echo strtoupper(htmlspecialchars($actualite['titre_actualite'])); ?></h1>
+        <h1><?= strtoupper(htmlspecialchars($actualite['titre_actualite'])) ?></h1>
 
         <div>
-            <h2><?php echo $date_formattee; ?></h2>
+            <h2><?= htmlspecialchars($date_formattee) ?></h2>
         </div>
 
         <p>
-            <?php echo nl2br(htmlspecialchars($actualite['contenu_actualite'])); ?>
+            <?= nl2br(htmlspecialchars($actualite['contenu_actualite'])) ?>
         </p>
     </section>
 
-    <?php require_once 'footerVue.php'; ?>
+    <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
 </body>
 
 </html>

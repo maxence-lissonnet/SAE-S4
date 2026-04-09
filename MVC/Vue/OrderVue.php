@@ -1,6 +1,6 @@
 <head>
     <title>Commander</title>
-    <link rel="stylesheet" href="assets/styles/order_style.css">
+    <link rel="stylesheet" href="Asset/Style/order_style.css">
 </head>
 
 <body class="body_margin">
@@ -12,7 +12,7 @@
     <div>
         <button id="cart-button">
             <a href="index.php?page=cart">
-                <img src="assets/fleche_retour.png" alt="Fleche de retour">
+                <img src="Asset/image/fleche_retour.png" alt="Fleche de retour">
                 Retourner au panier
             </a>
         </button>
@@ -34,17 +34,17 @@
                         <tr>
                             <td><?= htmlspecialchars($item['nom_article']) ?></td>
                             <td><?= $item['quantite'] ?></td>
-                            <td><?= number_format($item['prix_article'], 2, ',', ' ') ?> €</td>
-                            <td><?= number_format($item['prix_article'] * $item['quantite'], 2, ',', ' ') ?> €</td>
+                            <td><?= number_format((float) $item['prix_article'], 2, ',', ' ') ?> &euro;</td>
+                            <td><?= number_format($item['prix_article'] * $item['quantite'], 2, ',', ' ') ?> &euro;</td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
 
-            <h3>Total &nbsp : &nbsp<?= number_format($total, 2, ',', ' ') ?> €</h3>
+            <h3>Total &nbsp;: &nbsp;<?= number_format($total, 2, ',', ' ') ?> &euro;</h3>
 
             <?php if ($hasDiscount): ?>
-                <h3>Total après réductions &nbsp : &nbsp <?= number_format($totalWithReduc, 2, ',', ' ') ?> €</h3>
+                <h3>Total après réductions &nbsp;: &nbsp;<?= number_format($totalWithReduc, 2, ',', ' ') ?> &euro;</h3>
             <?php endif; ?>
         </div>
 

@@ -82,6 +82,14 @@ switch ($page) {
         require_once __DIR__ . "/Controller/AboutController.php";
         break;
 
+    case 'contact':
+        require_once __DIR__ . "/Controller/ContactController.php";
+        break;
+
+    case 'mentions_legales':
+        require_once __DIR__ . "/Controller/MentionsLegalesController.php";
+        break;
+
     case 'grade':
         require_once __DIR__ . "/Controller/GradeController.php";
         break;

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
 
     if ($fileName !== null) {
         if (!empty($infoUser['pp_membre'])) {
-            deleteFile($infoUser['pp_membre']); // Ta fonction dans files_save.php
+            deleteFile($infoUser['pp_membre']); 
         }
         $accountModel->updateProfilePicture($fileName, $userId);
         $_SESSION['message'] = "Mise à jour de la photo de profil réussie !";
