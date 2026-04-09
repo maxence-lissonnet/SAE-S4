@@ -14,13 +14,11 @@ class BoutiqueModel
         $whereClauses = ["deleted = false"];
         $params = [];
 
-        // Recherche par nom
         if (!empty($searchTerm)) {
-            $whereClauses[] = "nom_article LIKE ?";
-            $params[] = '%' . $searchTerm . '%';
+            $whereClauses[] = "LOWER(nom_article) LIKE ?";
+            $params[] = '%' . strtolower($searchTerm) . '%';
         }
 
-        // Filtres par catégorie
         if (!empty($filters)) {
             $placeholders = implode(", ", array_fill(0, count($filters), "?"));
             $whereClauses[] = "categorie_article IN ($placeholders)";
@@ -31,7 +29,6 @@ class BoutiqueModel
             $query .= " WHERE " . implode(" AND ", $whereClauses);
         }
 
-        // Gestion du tri
         $sortMapping = [
             "price_asc"  => "prix_article ASC",
             "price_desc" => "prix_article DESC",
@@ -40,9 +37,14 @@ class BoutiqueModel
         ];
         $query .= " ORDER BY " . ($sortMapping[$orderBy] ?? "nom_article ASC");
 
-        // --- CORRECTION ICI : Utilisation du vrai PDO au lieu de select() ---
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function get_categories()
+    {
+        $stmt = $this->db->query("SELECT DISTINCT categorie_article FROM ARTICLE WHERE deleted = false AND categorie_article IS NOT NULL AND categorie_article != '' AND categorie_article != 'Pas de categorie'");
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 }
