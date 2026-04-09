@@ -37,10 +37,6 @@
                 <li>
                     <a href="index.php?page=agenda">Agenda</a>
                 </li>
-
-                <li>
-                    <a href="index.php?page=my_gallery">Ma Galerie</a>
-                </li>
             <?php endif; ?>
 
             <li>

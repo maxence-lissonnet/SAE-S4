@@ -1,6 +1,6 @@
 <head>
     <title>Adhérer</title>
-    <link rel="stylesheet" href="styles/grade_subscription_style.css">
+    <link rel="stylesheet" href="Asset/Style/grade_subscription_style.css">
 </head>
 
 <body class="body_margin">
@@ -12,7 +12,7 @@
     <div>
         <button id="cart-button">
             <a href="index.php?page=grade">
-                <img src="/assets/fleche_retour.png" alt="Flèche de retour">
+                <img src="Asset/image/fleche_retour.png" alt="Flèche de retour">
                 Retourner aux grades
             </a>
         </button>
@@ -33,13 +33,13 @@
                     <tr>
                         <td>Grade <?= htmlspecialchars($grade['nom_grade']) ?></td>
                         <td>1</td>
-                        <td><?= number_format(htmlspecialchars($grade['prix_grade']), 2, ',', ' ') ?> €</td>
-                        <td><?= number_format(htmlspecialchars($grade['prix_grade']), 2, ',', ' ') ?> €</td>
+                        <td><?= number_format((float) $grade['prix_grade'], 2, ',', ' ') ?> &euro;</td>
+                        <td><?= number_format((float) $grade['prix_grade'], 2, ',', ' ') ?> &euro;</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h3>Total &nbsp : &nbsp<?= number_format(htmlspecialchars($grade['prix_grade']), 2, ',', ' ') ?> €</h3>
+            <h3>Total &nbsp;: &nbsp;<?= number_format((float) $grade['prix_grade'], 2, ',', ' ') ?> &euro;</h3>
         </div>
 
         <div>

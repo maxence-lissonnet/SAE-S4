@@ -5,6 +5,7 @@ class EvenementModel
     private $db;
     private $date;
     private $sql_date;
+    private $eventColumns = null;
 
     public function __construct($db)
     {
@@ -13,9 +14,25 @@ class EvenementModel
         $this->sql_date = $this->date["year"] . "-" . $this->date["mon"] . "-" . $this->date["mday"];
     }
 
+    private function getEventColumns()
+    {
+        if ($this->eventColumns !== null) {
+            return $this->eventColumns;
+        }
+
+        $stmt = $this->db->query("SHOW COLUMNS FROM EVENEMENT");
+        $this->eventColumns = array_column($stmt->fetchAll(PDO::FETCH_ASSOC), "Field");
+
+        return $this->eventColumns;
+    }
+
+    private function hasEventColumn($column)
+    {
+        return in_array($column, $this->getEventColumns(), true);
+    }
+
     public function get_evenement_passe($nbShow)
     {
-
         $stmt = $this->db->prepare("SELECT id_evenement, nom_evenement, lieu_evenement, date_evenement FROM EVENEMENT WHERE date_evenement < CURDATE() ORDER BY date_evenement DESC LIMIT ?;");
         $stmt->execute([$nbShow]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +40,7 @@ class EvenementModel
 
     public function get_evenement_a_venir()
     {
-        $stmt = $this->db->prepare("SELECT id_evenement, nom_evenement, lieu_evenement, date_evenement FROM EVENEMENT WHERE date_evenement >= CURDATE() ORDER BY date_evenement DESC ;");
+        $stmt = $this->db->prepare("SELECT id_evenement, nom_evenement, lieu_evenement, date_evenement FROM EVENEMENT WHERE date_evenement >= CURDATE() ORDER BY date_evenement DESC;");
         $stmt->execute([]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -37,21 +54,39 @@ class EvenementModel
 
     public function get_place_disponible($eventid)
     {
-        $stmt = $this->db->prepare("SELECT (EVENEMENT.places_evenement - (SELECT COUNT(*) FROM INSCRIPTION WHERE INSCRIPTION.id_evenement = EVENEMENT.id_evenement)) > 0 AS isPlaceDisponible FROM EVENEMENT WHERE EVENEMENT.id_evenement = ? ;");
+        $stmt = $this->db->prepare("SELECT (EVENEMENT.places_evenement - (SELECT COUNT(*) FROM INSCRIPTION WHERE INSCRIPTION.id_evenement = EVENEMENT.id_evenement)) > 0 AS isPlaceDisponible FROM EVENEMENT WHERE EVENEMENT.id_evenement = ?;");
         $stmt->execute([$eventid]);
-        return $stmt->fetch(PDO::FETCH_ASSOC)['isPlaceDisponible'];
+        return $stmt->fetch(PDO::FETCH_ASSOC)["isPlaceDisponible"];
     }
 
     public function get_inscription_status($eventid, $userid)
     {
         $stmt = $this->db->prepare("SELECT COUNT(*) > 0 AS isInscrit FROM INSCRIPTION WHERE id_evenement = ? AND id_membre = ?;");
         $stmt->execute([$eventid, $userid]);
-        return $stmt->fetch(PDO::FETCH_ASSOC)['isInscrit'];
+        return $stmt->fetch(PDO::FETCH_ASSOC)["isInscrit"];
     }
 
     public function get_event_by_id($eventid)
     {
-        $stmt = $this->db->prepare("SELECT nom_evenement, xp_evenement, places_evenement, prix_evenement, reductions_evenement, lieu_evenement, date_evenement FROM EVENEMENT WHERE id_evenement = ?");
+        $fields = [
+            "nom_evenement",
+            "xp_evenement",
+            "places_evenement",
+            "prix_evenement",
+            "reductions_evenement",
+            "lieu_evenement",
+            "date_evenement",
+        ];
+
+        $fields[] = $this->hasEventColumn("image_evenement")
+            ? "image_evenement"
+            : "NULL AS image_evenement";
+
+        $fields[] = $this->hasEventColumn("description_evenement")
+            ? "description_evenement"
+            : "'' AS description_evenement";
+
+        $stmt = $this->db->prepare("SELECT " . implode(", ", $fields) . " FROM EVENEMENT WHERE id_evenement = ?");
         $stmt->execute([$eventid]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -71,9 +106,9 @@ class EvenementModel
     public function get_user_reduction($userid)
     {
         $stmt = $this->db->prepare(
-            "SELECT reduction_grade FROM ADHESION 
+            "SELECT reduction_grade FROM ADHESION
          JOIN GRADE ON ADHESION.id_grade = GRADE.id_grade
-         WHERE id_membre = ? AND reduction_grade > 0 
+         WHERE id_membre = ? AND reduction_grade > 0
          ORDER BY ADHESION.date_adhesion DESC LIMIT 1"
         );
         $stmt->execute([$userid]);
@@ -90,7 +125,7 @@ class EvenementModel
         $stmt->execute([$userid, $eventid, $final_price]);
 
         $event = $this->get_event_by_id($eventid);
-        $xp = $event['xp_evenement'];
+        $xp = $event["xp_evenement"];
 
         $stmt = $this->db->prepare("UPDATE MEMBRE SET xp_membre = xp_membre + ? WHERE id_membre = ?");
         $stmt->execute([$xp, $userid]);
@@ -104,19 +139,52 @@ class EvenementModel
 
     public function createEmptyEvent()
     {
-        $stmt = $this->db->prepare("INSERT INTO EVENEMENT (nom_evenement, description_evenement, xp_evenement, places_evenement, prix_evenement, lieu_evenement, date_evenement, reductions_evenement) VALUES ('Nouvel événement', '', 10, -1, 0, '', NOW(), 1)");
-        $stmt->execute();
+        $columns = ["nom_evenement", "xp_evenement", "places_evenement", "prix_evenement", "lieu_evenement", "date_evenement", "reductions_evenement"];
+        $placeholders = ["?", "?", "?", "?", "?", "NOW()", "?"];
+        $params = ["Nouvel evenement", 10, -1, 0, "", 1];
+
+        if ($this->hasEventColumn("description_evenement")) {
+            array_splice($columns, 1, 0, ["description_evenement"]);
+            array_splice($placeholders, 1, 0, ["?"]);
+            array_splice($params, 1, 0, [""]);
+        }
+
+        $stmt = $this->db->prepare(
+            "INSERT INTO EVENEMENT (" . implode(", ", $columns) . ") VALUES (" . implode(", ", $placeholders) . ")"
+        );
+        $stmt->execute($params);
         return $this->db->lastInsertId();
     }
 
     public function updateEvent($id, $nom, $desc, $xp, $places, $prix, $lieu, $date, $reductions)
     {
-        $stmt = $this->db->prepare("UPDATE EVENEMENT SET nom_evenement = ?, description_evenement = ?, xp_evenement = ?, places_evenement = ?, prix_evenement = ?, lieu_evenement = ?, date_evenement = ?, reductions_evenement = ? WHERE id_evenement = ?");
-        return $stmt->execute([$nom, $desc, $xp, $places, $prix, $lieu, $date, $reductions, $id]);
+        $assignments = [
+            "nom_evenement = ?",
+            "xp_evenement = ?",
+            "places_evenement = ?",
+            "prix_evenement = ?",
+            "lieu_evenement = ?",
+            "date_evenement = ?",
+            "reductions_evenement = ?",
+        ];
+        $params = [$nom, $xp, $places, $prix, $lieu, $date, $reductions];
+
+        if ($this->hasEventColumn("description_evenement")) {
+            array_splice($assignments, 1, 0, ["description_evenement = ?"]);
+            array_splice($params, 1, 0, [$desc]);
+        }
+
+        $params[] = $id;
+        $stmt = $this->db->prepare("UPDATE EVENEMENT SET " . implode(", ", $assignments) . " WHERE id_evenement = ?");
+        return $stmt->execute($params);
     }
 
     public function updateEventImage($id, $filename)
     {
+        if (!$this->hasEventColumn("image_evenement")) {
+            return false;
+        }
+
         $stmt = $this->db->prepare("UPDATE EVENEMENT SET image_evenement = ? WHERE id_evenement = ?");
         return $stmt->execute([$filename, $id]);
     }
