@@ -25,13 +25,24 @@
 
         <h1><?php echo strtoupper(htmlspecialchars($event['nom_evenement'])); ?></h1>
 
+        <?php if ($inscriptionNotice !== null) : ?>
+            <p class="event-notice <?php echo htmlspecialchars($inscriptionNotice['type']); ?>">
+                <?php echo htmlspecialchars($inscriptionNotice['message']); ?>
+            </p>
+        <?php endif; ?>
+
         <div>
             <h2><?php echo date('d/m/Y', strtotime($event['date_evenement'])); ?></h2>
 
             <?php if ($event_date < $current_date) : ?>
-                <button class="subscription" id="passed_subscription">Passe</button>
+                <button class="subscription subscription-disabled">Passe</button>
             <?php elseif ($isSubscribed) : ?>
-                <button class="subscription" id="passed_subscription">Inscrit</button>
+                <form class="subscription" action="index.php?page=event_desinscription" method="post">
+                    <input type="hidden" name="eventid" value="<?php echo $eventid; ?>">
+                    <button type="submit" class="subscription-cancel">Se desinscrire</button>
+                </form>
+            <?php elseif (!$isPlaceDisponible) : ?>
+                <button class="subscription subscription-disabled">Complet</button>
             <?php else : ?>
                 <form class="subscription" action="index.php?page=event_inscription" method="post">
                     <input type="hidden" name="eventid" value="<?php echo $eventid; ?>">

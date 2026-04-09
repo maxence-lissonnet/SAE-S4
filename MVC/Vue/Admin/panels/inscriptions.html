@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscriptions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/general.css">
+    <link rel="stylesheet" href="../styles/panels.css">
+    <link rel="stylesheet" href="../styles/inscriptions.css">
+</head>
+<body>
+
+    <header>
+        <h1>Inscriptions aux evenements</h1>
+    </header>
+
+    <main>
+        <div class="filters">
+            <div>
+                <input type="text" id="eventSearch" placeholder="Rechercher un evenement">
+            </div>
+            <div>
+                <input type="text" id="userSearch" placeholder="Rechercher un utilisateur">
+            </div>
+        </div>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Evenement</th>
+                    <th>Date evenement</th>
+                    <th>Utilisateur</th>
+                    <th>Email</th>
+                    <th>Date inscription</th>
+                    <th>Paiement</th>
+                    <th>Prix</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <!-- AUTO GENERATED -->
+            </tbody>
+        </table>
+
+        <p id="empty_state" hidden>Aucune inscription trouvee.</p>
+    </main>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="module" src="../scripts/inscriptions.js"></script>
+
+</body>
+</html>

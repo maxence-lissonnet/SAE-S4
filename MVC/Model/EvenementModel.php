@@ -54,9 +54,9 @@ class EvenementModel
 
     public function get_place_disponible($eventid)
     {
-        $stmt = $this->db->prepare("SELECT (EVENEMENT.places_evenement - (SELECT COUNT(*) FROM INSCRIPTION WHERE INSCRIPTION.id_evenement = EVENEMENT.id_evenement)) > 0 AS isPlaceDisponible FROM EVENEMENT WHERE EVENEMENT.id_evenement = ?;");
+        $stmt = $this->db->prepare("SELECT CASE WHEN EVENEMENT.places_evenement < 0 THEN 1 ELSE (EVENEMENT.places_evenement - (SELECT COUNT(*) FROM INSCRIPTION WHERE INSCRIPTION.id_evenement = EVENEMENT.id_evenement)) > 0 END AS isPlaceDisponible FROM EVENEMENT WHERE EVENEMENT.id_evenement = ?;");
         $stmt->execute([$eventid]);
-        return $stmt->fetch(PDO::FETCH_ASSOC)["isPlaceDisponible"];
+        return (bool) $stmt->fetch(PDO::FETCH_ASSOC)["isPlaceDisponible"];
     }
 
     public function get_inscription_status($eventid, $userid)
@@ -116,19 +116,92 @@ class EvenementModel
         return $res ? (1 - ($res["reduction_grade"] / 100)) : 1;
     }
 
-    public function register_user_to_event($userid, $eventid, $final_price)
+    private function normalizeEventPaymentMethod($paymentMethod)
     {
-        $stmt = $this->db->prepare(
-            "INSERT INTO INSCRIPTION (id_membre, id_evenement, date_inscription, paiement_inscription, prix_inscription)
-         VALUES (?, ?, NOW(), 'WEB', ?)"
-        );
-        $stmt->execute([$userid, $eventid, $final_price]);
+        return match ($paymentMethod) {
+            'carte_credit' => 'carte_credit',
+            'paypal' => 'paypal',
+            'especes' => 'especes',
+            default => 'web',
+        };
+    }
 
-        $event = $this->get_event_by_id($eventid);
-        $xp = $event["xp_evenement"];
+    public function register_user_to_event($userid, $eventid, $final_price, $paymentMethod = 'web')
+    {
+        $paymentMethod = $this->normalizeEventPaymentMethod($paymentMethod);
+        $startedTransaction = !$this->db->inTransaction();
 
-        $stmt = $this->db->prepare("UPDATE MEMBRE SET xp_membre = xp_membre + ? WHERE id_membre = ?");
-        $stmt->execute([$xp, $userid]);
+        if ($startedTransaction) {
+            $this->db->beginTransaction();
+        }
+
+        try {
+            $stmt = $this->db->prepare(
+                "INSERT INTO INSCRIPTION (id_membre, id_evenement, date_inscription, paiement_inscription, prix_inscription)
+             VALUES (?, ?, NOW(), ?, ?)"
+            );
+            $stmt->execute([$userid, $eventid, $paymentMethod, $final_price]);
+
+            $event = $this->get_event_by_id($eventid);
+            $xp = $event["xp_evenement"];
+
+            $stmt = $this->db->prepare("UPDATE MEMBRE SET xp_membre = xp_membre + ? WHERE id_membre = ?");
+            $stmt->execute([$xp, $userid]);
+
+            if ($startedTransaction) {
+                $this->db->commit();
+            }
+        } catch (Throwable $e) {
+            if ($startedTransaction && $this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+
+            throw $e;
+        }
+    }
+
+    public function unregister_user_from_event($userid, $eventid)
+    {
+        $startedTransaction = !$this->db->inTransaction();
+
+        if ($startedTransaction) {
+            $this->db->beginTransaction();
+        }
+
+        try {
+            $stmt = $this->db->prepare("SELECT id_membre FROM INSCRIPTION WHERE id_evenement = ? AND id_membre = ?");
+            $stmt->execute([$eventid, $userid]);
+
+            if (!$stmt->fetch(PDO::FETCH_ASSOC)) {
+                throw new RuntimeException("Inscription introuvable.");
+            }
+
+            $event = $this->get_event_by_id($eventid);
+            if (!$event) {
+                throw new RuntimeException("Evenement introuvable.");
+            }
+
+            $stmt = $this->db->prepare("DELETE FROM INSCRIPTION WHERE id_evenement = ? AND id_membre = ?");
+            $stmt->execute([$eventid, $userid]);
+
+            $xp = max(0, (int) ($event["xp_evenement"] ?? 0));
+            if ($xp > 0) {
+                $stmt = $this->db->prepare("UPDATE MEMBRE SET xp_membre = GREATEST(xp_membre - ?, 0) WHERE id_membre = ?");
+                $stmt->execute([$xp, $userid]);
+            }
+
+            if ($startedTransaction) {
+                $this->db->commit();
+            }
+
+            return true;
+        } catch (Throwable $e) {
+            if ($startedTransaction && $this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+
+            throw $e;
+        }
     }
 
     public function getAllEvents()

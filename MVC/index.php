@@ -33,6 +33,10 @@ switch ($page) {
         require_once __DIR__ . "/Controller/EvenenementInscriptionController.php";
         break;
 
+    case 'event_desinscription':
+        require_once __DIR__ . "/Controller/EvenementDesinscriptionController.php";
+        break;
+
     case 'actualite':
         require_once __DIR__ . "/Controller/ActualiteController.php";
         break;
@@ -64,6 +68,10 @@ switch ($page) {
 
     case 'login':
         require_once __DIR__ . "/Controller/LoginController.php";
+        break;
+
+    case 'forgot_password':
+        require_once __DIR__ . "/Controller/ForgotPasswordController.php";
         break;
 
     case 'signin':
@@ -120,6 +128,10 @@ switch ($page) {
 
     case 'api_event':
         require_once __DIR__ . '/Controller/ApiEventController.php';
+        break;
+
+    case 'api_inscription':
+        require_once __DIR__ . '/Controller/ApiInscriptionController.php';
         break;
 
     case 'api_users':
