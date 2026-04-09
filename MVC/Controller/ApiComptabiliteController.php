@@ -24,6 +24,7 @@ try {
             $nom = $_POST['nom'];
             $date = $_POST['date'];
             $file = $_FILES['file'];
+            $id_membre = $_SESSION['userid'] ?? null;
 
             // Récupère l'extension du fichier (ex: pdf, png)
             $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -37,7 +38,7 @@ try {
                 throw new Exception("Erreur lors de l'enregistrement du fichier sur le serveur.");
             }
 
-            $comptaModel->addFile($nom, $date, $filename);
+            $comptaModel->addFile($nom, $date, $filename, $id_membre);
             echo json_encode(["message" => "Fichier uploadé avec succès"]);
             break;
 

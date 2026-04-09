@@ -1,6 +1,6 @@
 <head>
     <title>Mon panier</title>
-    <link rel="stylesheet" href="Asset/Style/cart_style.css">
+    <link rel="stylesheet" href="./Asset/Style/cart_style.css">
 
     <script>
         function pressEnter(event) {
@@ -31,12 +31,12 @@
         </div>
 
         <div>
-            <button id="shop-button">
-                <a href="index.php?page=boutique">
-                    <img src="Asset/image/fleche_retour.png" alt="Fleche de retour">
+            <a href="index.php?page=boutique">
+                <button id="shop-button">
+                    <img src="./Asset/image/fleche_retour.png" alt="Fleche de retour">
                     Retourner à la boutique
-                </a>
-            </button>
+                </button>
+            </a>
         </div>
     </div>
 

@@ -30,7 +30,10 @@ try {
         // --- METTRE À JOUR (Données textuelles) ---
         case 'PUT':
             $input = json_decode(file_get_contents('php://input'), true);
+
             if (!$id || !$input) throw new Exception("Données invalides.");
+
+            $roles = $input['roles'] ?? [null];
 
             // On utilise la nouvelle fonction spécifique à l'admin
             $userModel->updateUserAdmin(
@@ -40,7 +43,7 @@ try {
                 $input['email'],
                 $input['tp'],
                 $input['xp'],
-                $input['roles']
+                $roles
             );
             echo json_encode(["message" => "Utilisateur mis à jour avec succès"]);
             break;

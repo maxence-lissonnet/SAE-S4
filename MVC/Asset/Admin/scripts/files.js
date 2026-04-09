@@ -34,10 +34,10 @@ export async function openFileDialog(accept = 'image/*') {
     });
 }
 
-export function getFileBucketUrl(filename){
+export function getFileBucketUrl(filename) {
     if (filename.startsWith('http')) {
         return filename;
     }
-    
-    return `../../../API/files/${filename}`; 
+
+    return `../../../API/files/${filename}`;
 }
