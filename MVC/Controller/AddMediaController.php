@@ -8,7 +8,7 @@ if (!isset($_SESSION["userid"])) {
     exit();
 }
 
-require_once __DIR__ . '/../files_save.php';
+require_once __DIR__ . '/files_save.php';
 require_once __DIR__ . '/../Model/GalleryModel.php';
 
 // Si tu passes par ton routeur index.php, la variable $db (PDO) existe déjà.
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'], $_POST['even
     }
 
     // 3. Redirection vers la galerie de cet événement (via le routeur !)
-    header("Location: index.php?page=my_gallery&eventid=" . $eventId);
+    header("Location: index.php?page=event_detail&id=" . $eventId . "#gallery");
     exit();
 } else {
     // Si on accède à cette page sans poster de formulaire, on renvoie à l'accueil

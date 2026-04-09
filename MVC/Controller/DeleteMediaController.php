@@ -6,7 +6,7 @@ if (!isset($_SESSION["userid"])) {
     exit();
 }
 
-require_once __DIR__ . '/../files_save.php';
+require_once __DIR__ . '/files_save.php';
 require_once __DIR__ . '/../Model/GalleryModel.php';
 
 $galleryModel = new GalleryModel($db);
@@ -15,16 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mediaid'], $_POST['ev
 
     $mediaId = (int)$_POST['mediaid'];
     $eventId = (int)$_POST['eventid'];
+    $userId = (int) $_SESSION['userid'];
 
-    $fileName = $galleryModel->getMediaUrl($mediaId, $eventId);
+    $fileName = $galleryModel->getMediaUrl($mediaId, $eventId, $userId);
 
     if ($fileName !== null) {
         if (deleteFile($fileName)) {
-            $galleryModel->deleteMedia($mediaId, $eventId);
+            $galleryModel->deleteMedia($mediaId, $eventId, $userId);
         }
     }
 
-    header("Location: index.php?page=my_gallery&eventid=" . $eventId);
+    header("Location: index.php?page=event_detail&id=" . $eventId . "#gallery");
     exit();
 } else {
     header("Location: index.php");

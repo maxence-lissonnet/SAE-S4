@@ -102,16 +102,11 @@ switch ($page) {
         require_once __DIR__ . "/Controller/AgendaController.php";
         break;
 
-    case 'my_gallery':
-        require_once __DIR__ . "/Controller/MyGalleryController.php";
-        break;
-
     case 'add_media':
         require_once __DIR__ . "/Controller/AddMediaController.php";
         break;
 
     case 'delete_media':
-        require_once __DIR__ . "/Controller/MyGalleryController.php";
         require_once __DIR__ . "/Controller/DeleteMediaController.php";
         break;
 
