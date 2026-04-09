@@ -7,16 +7,6 @@
 
     <?php require_once __DIR__ . "/../Controller/HeaderController.php"; ?>
     <?php
-    $memberPhotoMap = [
-        'axel' => 'Asset/image/photo_axel.png',
-        'axelle' => 'Asset/image/photo_axel.png',
-        'enzo' => 'Asset/image/photo_enzo.png',
-        'gemino' => 'Asset/image/photo_gemino.png',
-        'julien' => 'Asset/image/photo_julien.png',
-        'mathis' => 'Asset/image/photo_mathis.png',
-        'tom' => 'Asset/image/photo_tom.png',
-    ];
-
     $resolveAccountFile = static function ($path, $fallback, $legacyMap = []) {
         if (empty($path)) {
             return $fallback;
@@ -38,8 +28,7 @@
         return $legacyMap[basename($relativePath)] ?? $fallback;
     };
 
-    $defaultProfilePicture = $memberPhotoMap[strtolower(trim((string) ($infoUser['prenom_membre'] ?? '')))] ?? 'Asset/image/user.jpg';
-    $profilePictureUrl = $resolveAccountFile($infoUser['pp_membre'] ?? null, $defaultProfilePicture);
+    $profilePictureUrl = $resolveAccountFile($infoUser['pp_membre'] ?? null, 'Asset/image/user.jpg');
     $gradeImageUrl = $resolveAccountFile(
         $infoUser['image_grade'] ?? null,
         'Asset/image/grade.webp',
