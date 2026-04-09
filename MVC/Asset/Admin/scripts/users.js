@@ -74,7 +74,7 @@ async function saveUser(id_user){
 
     // Stop loader
     hideLoader();
-
+ 
 }
 
 /**
