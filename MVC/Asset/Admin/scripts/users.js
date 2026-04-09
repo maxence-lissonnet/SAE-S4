@@ -11,13 +11,6 @@ showPropertieSkeleton();
 // Get inputs
 const delete_btn = document.getElementById('delete_btn');
 const new_btn = document.getElementById('new_btn');
-const prop_img = document.getElementById('prop_img');
-const prop_nom = document.getElementById('prop_nom');
-const prop_prenom = document.getElementById('prop_prenom');
-const prop_email = document.getElementById('prop_email');
-const prop_roles = document.getElementById('prop_roles');
-const prop_xp = document.getElementById('prop_xp');
-const prop_tp = document.getElementById('prop_tp');
 
 /**
  * Reloads the navigation bar with user items.
@@ -26,7 +19,7 @@ async function fetchData() {
 
     // Fetch data
     let users = [];
-    try{
+    try {
         users = await requestGET('users');
     } catch (error) {
         toast('Erreur lors du chargement des utilisateurs.', true);
@@ -35,9 +28,9 @@ async function fetchData() {
     // Transform data to navbar items
     return users
         .filter(user => user.prenom_membre !== 'N/A')
-        .map(user => ({label: user.prenom_membre + ' ' + user.nom_membre.toUpperCase(), id: user.id_membre}));
+        .map(user => ({ label: user.prenom_membre + ' ' + user.nom_membre.toUpperCase(), id: user.id_membre }));
 
-    }
+}
 
 /**
  * Saves the user information.
@@ -46,48 +39,55 @@ async function fetchData() {
  * @returns {Promise<void>} A promise that resolves when the user is successfully saved.
  * @throws Will alert an error message if the request fails.
  */
-async function saveUser(id_user){
+async function saveUser(id_user) {
+    const prop_img = document.getElementById('prop_img');
+    const prop_nom = document.getElementById('prop_nom');
+    const prop_prenom = document.getElementById('prop_prenom');
+    const prop_email = document.getElementById('prop_email');
+    const prop_roles = document.getElementById('prop_roles');
+    const prop_xp = document.getElementById('prop_xp');
+    const prop_tp = document.getElementById('prop_tp');
 
     // Show loader
     showLoader();
 
+    const selectedRoles = Array.from(prop_roles.children)
+        .filter(role => role.classList.contains("selected"))
+        .map(role => parseInt(role.getAttribute('id')));
+
     // Create data
     const data = {
-        name: prop_nom.value === '' ? 'N/A' : prop_nom.value,
-        firstname: prop_prenom.value === '' ? 'N/A' : prop_prenom.value,
-        email: prop_email.value === '' ? 'N/A' : prop_email.value,
-        tp: prop_tp.value,
-        xp: prop_xp.value === '' ? 0 : prop_xp.value,
-        roles: []
+        name: prop_nom.value.trim() || 'N/A',
+        firstname: prop_prenom.value.trim() || 'N/A',
+        email: prop_email.value.trim() || 'N/A',
+        tp: prop_tp.value || 'N/A',
+        xp: parseInt(prop_xp.value) || 0,
+        roles: selectedRoles
     };
 
     // Send data
     try {
         await requestPUT('users&id=' + id_user.toString(), data);
-        const roles = {roles: Array.from(prop_roles.children).filter(role => role.classList.contains('selected')).map(role => parseInt(role.getAttribute('id')))}
-        await requestPUT('users&id=' + id_user.toString(), roles);
         toast('Utiliateur mis à jour avec succès.');
         selectUser(id_user);
     } catch (error) {
         toast(error.message, true);
     }
-
     // Stop loader
     hideLoader();
- 
 }
 
 /**
  * Deletes the user from the DB.
 */
-async function deleteUser(id_user){
+async function deleteUser(id_user) {
 
     // Show loader
     showLoader();
 
     // Send request
     await requestDELETE(`users&id=${id_user}`);
-    
+
     /// Update navbar
     refreshNavbar(fetchData, selectUser);
 
@@ -102,7 +102,7 @@ async function deleteUser(id_user){
  * @param {number} id_member - The ID of the grade to be selected.
  * @returns {Promise<void>} A promise that resolves when the grade information has been fetched and displayed.
  */
-async function selectUser(id_member, li){
+async function selectUser(id_member, li) {
 
     // Show skeleton
     showPropertieSkeleton();
@@ -122,36 +122,37 @@ async function selectUser(id_member, li){
     prop_tp.value = user.tp_membre;
 
     // Update save button
-    save_btn.onclick = ()=>{
+    save_btn.onclick = () => {
+        console.log("Passé")
         saveUser(id_member);
     };
 
     // Delete button
-    delete_btn.onclick = ()=>{
+    delete_btn.onclick = () => {
         swal({
             title: "Êtes vous sûr ?",
             text: "Cette action est définitive",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-                deleteUser(id_member);
-            }
-          });
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    deleteUser(id_member);
+                }
+            });
     };
 
     // Update name
-    function updateName(){
+    function updateName() {
         li.textContent = prop_prenom.value + ' ' + prop_nom.value.toUpperCase();
     }
     prop_nom.onkeyup = updateName;
     prop_prenom.onkeyup = updateName;
 
     // Update image
-    document.getElementById('prop_img_edit').onclick = async ()=>{
-        
+    document.getElementById('prop_img_edit').onclick = async () => {
+
         // Get file form
         const image = await openFileDialog();
 
@@ -191,14 +192,14 @@ async function selectUser(id_member, li){
         prop_roles.appendChild(button);
 
         // Check it if added
-        if(user_roles.includes(role.id_role))
+        if (user_roles.includes(role.id_role))
             button.classList.add('selected');
 
         // Add event
-        button.onclick = async ()=>{
+        button.onclick = async () => {
 
             // Add or remove role
-            if(button.classList.contains('selected')){
+            if (button.classList.contains('selected')) {
                 button.classList.remove('selected');
             } else {
                 button.classList.add('selected');
@@ -213,11 +214,11 @@ async function selectUser(id_member, li){
 
     // Hide skeleton
     hidePropertieSkeleton();
-    
+
 }
 
 // Handle new user
-new_btn.onclick = async ()=>{
+new_btn.onclick = async () => {
 
     // Show loader
     showLoader();

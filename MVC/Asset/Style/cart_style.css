@@ -23,11 +23,12 @@ H1 {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    text-decoration: none; /* Supprime le soulignement */
+    text-decoration: none;
+    /* Supprime le soulignement */
     color: inherit;
     width: 100%;
     height: 100%;
-    gap : 10px;
+    gap: 10px;
 }
 
 #shop-button img {
@@ -35,7 +36,7 @@ H1 {
     height: 30px;
 }
 
-#cart-container{
+#cart-container {
     width: 60%;
     margin: auto;
     background-color: #1a1a1a;
@@ -48,10 +49,7 @@ H1 {
     margin-top: 80px;
 }
 
-
-
-
-#cart-container table{
+#cart-container table {
     width: 100%;
     border-radius: 15px;
     background-color: #1E1E1E;
@@ -61,9 +59,6 @@ H1 {
     overflow: hidden;
 }
 
-
-
-
 #cart-container table thead {
     border-bottom: 20px solid #1a1a1a;
     border-radius: 15px;
@@ -72,7 +67,7 @@ H1 {
 
 #cart-container table thead th {
     background-color: #1E1E1E;
-    color:white;
+    color: white;
     padding: 20px;
     font-weight: bold;
     text-align: center;
@@ -121,8 +116,8 @@ H1 {
     width: 5vw;
     height: 4vh;
     background-color: #1E1E1E;
-    font-size: 16px;               
-    color: white;  
+    font-size: 16px;
+    color: white;
     padding: 2vh;
     text-align: center;
 }
@@ -134,22 +129,23 @@ H1 {
     overflow: hidden;
 }
 
-#cart-container table tfoot tr{
-    display: block; /* Nécessaire pour que margin fonctionne sur <tr> */
+#cart-container table tfoot tr {
+    display: block;
+    /* Nécessaire pour que margin fonctionne sur <tr> */
 }
 
-#cart-container table tfoot th{
+#cart-container table tfoot th {
     padding-left: 40px;
     text-align: start;
     font-weight: bold;
     font-size: 1.25em;
 }
 
-#cart-container table tfoot td{
+#cart-container table tfoot td {
     font-size: 1.2em;
 }
 
-#empty-cart{
+#empty-cart {
     text-align: center;
     font-size: 2em;
 }
@@ -166,7 +162,7 @@ H1 {
     cursor: pointer;
     width: 270px;
     height: 60px;
-    background-color:  rgb(119, 241, 190);
+    background-color: rgb(119, 241, 190);
     color: #1E1E1E;
     margin: auto;
     margin-top: 50px;

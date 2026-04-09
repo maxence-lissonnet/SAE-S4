@@ -7,7 +7,7 @@ import { getFileBucketUrl, openFileDialog } from "./files.js";
 // Elements
 const main_content = document.getElementById('main_content');
 
-async function updateView(){
+async function updateView() {
 
     // Show skeleton
     showPropertieSkeleton();
@@ -34,7 +34,7 @@ async function updateView(){
 
 }
 
-function addAccountingElement(data){
+function addAccountingElement(data) {
 
     // Create div
     const container = document.createElement('div');
@@ -55,6 +55,7 @@ function addAccountingElement(data){
     text.appendChild(date);
     container.appendChild(text);
 
+    console.log(data.url_comptabilite);
     // Add buttons
     const download_button = document.createElement('button');
     download_button.className = 'btn-transparent btn-blue';
@@ -72,6 +73,7 @@ function addAccountingElement(data){
     download_button.onclick = () => {
         window.open(getFileBucketUrl(data.url_comptabilite), '_blank');
     }
+
 
     // Add delete event
     delete_button.onclick = async () => {
@@ -92,17 +94,19 @@ function addAccountingElement(data){
                 }
             }
         });
-        
+
     }
 
 }
 
-function addUpdloadButton(){
+function addUpdloadButton() {
 
     // Add "upload file" button
     const upload_button = document.createElement('button');
-    upload_button.innerHTML = '<img src="../ressources/download.svg"><p>Upload file</p>';
+    upload_button.innerHTML = '<img src="../../../Asset/image/download.svg"> <p>Importer un fichier</p>';
     upload_button.className = 'btn-transparent btn-blue upload-button';
+    upload_button.style.backgroundColor = "#17A2B8";
+    upload_button.style.color = "white";
     main_content.appendChild(upload_button);
 
     // Add event listener
@@ -116,24 +120,22 @@ function addUpdloadButton(){
             title: "Entrez le nom a donner",
             text: "Veuillez saisir le nom :",
             content: {
-              element: "input",
-              attributes: {
-                placeholder: "Nom du fichier",
-                type: "text"
-              },
+                element: "input",
+                attributes: {
+                    placeholder: "Nom du fichier",
+                    type: "text"
+                },
             },
             buttons: ["Annuler", "Valider"],
-          }).then(function (value) {
+        }).then(function (value) {
             if (value) {
                 uploadFile(file, value, new Date().toISOString().split('T')[0]);
             }
-          });
-
+        });
     }
-
 }
 
-async function uploadFile(file, name, date){
+async function uploadFile(file, name, date) {
 
     // Show loader
     showLoader();
@@ -143,9 +145,8 @@ async function uploadFile(file, name, date){
     form_data.append('file', file);
     form_data.append('nom', name);
     form_data.append('date', date);
-
     // Send request
-    try{
+    try {
         await requestPOST('accounting', form_data);
         toast("Fichier uploadé avec succès");
         updateView();
