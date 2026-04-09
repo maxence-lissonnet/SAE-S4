@@ -1,6 +1,6 @@
 <head>
     <title>Mon panier</title>
-    <link rel="stylesheet" href="Asset/Style/cart_style.css">
+    <link rel="stylesheet" href="./Asset/Style/cart_style.css">
 
     <script>
         function pressEnter(event) {
@@ -31,12 +31,12 @@
         </div>
 
         <div>
-            <button id="shop-button">
-                <a href="index.php?page=boutique">
-                    <img src="Asset/image/fleche_retour.png" alt="Fleche de retour">
-                    Retourner à la boutique
-                </a>
-            </button>
+            <a href="index.php?page=boutique">
+                <button id="shop-button">
+                    <img src="./Asset/image/fleche_retour.png" alt="Fleche de retour">
+                    Retourner &agrave; la boutique
+                </button>
+            </a>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                         <tr>
                             <th>Article</th>
                             <th>Prix unitaire</th>
-                            <th>Quantité</th>
+                            <th>Quantit&eacute;</th>
                             <th>Sous-total</th>
                             <th>Action</th>
                         </tr>
@@ -87,18 +87,18 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Nombre d'articles &nbsp;: </th>
+                            <th colspan="4">Nombre d'articles &nbsp;:</th>
                             <td><?= $cart->count() ?></td>
                         </tr>
                         <tr>
-                            <th>Total &nbsp;: </th>
+                            <th colspan="4">Total &nbsp;:</th>
                             <td><?= number_format($cart->total(), 2, ',', ' ') ?> &euro;</td>
                         </tr>
 
                         <?php if ($totalAvecReduc !== null) : ?>
                             <tr>
-                                <th style="min-width: 400px">Total après réductions (-<?= $reductionPercent ?>%) &nbsp;: </th>
-                                <td style="min-width: 50px"><?= number_format($totalAvecReduc, 2, ',', ' ') ?> &euro;</td>
+                                <th colspan="4">Total apr&egrave;s r&eacute;ductions (-<?= $reductionPercent ?>%) &nbsp;:</th>
+                                <td><?= number_format($totalAvecReduc, 2, ',', ' ') ?> &euro;</td>
                             </tr>
                         <?php endif; ?>
                     </tfoot>

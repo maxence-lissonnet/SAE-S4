@@ -21,10 +21,10 @@ class ComptabiliteModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function addFile($nom, $date, $filename)
+    public function addFile($nom, $date, $filename, $id_membre)
     {
-        $stmt = $this->db->prepare("INSERT INTO COMPTABILITE (nom_comptabilite, date_comptabilite, url_comptabilite) VALUES (?, ?, ?)");
-        return $stmt->execute([$nom, $date, $filename]);
+        $stmt = $this->db->prepare("INSERT INTO COMPTABILITE (nom_comptabilite, date_comptabilite, url_comptabilite, id_membre) VALUES (?, ?, ?, ?)");
+        return $stmt->execute([$nom, $date, $filename, $id_membre]);
     }
 
     public function deleteFile($id)

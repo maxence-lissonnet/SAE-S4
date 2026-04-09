@@ -26,7 +26,7 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
                     <img src="<?= htmlspecialchars($product['resolved_image_grade']) ?>" alt="Image du grade">
                     <h3><?= htmlspecialchars($product['nom_grade']) ?></h3>
                     <p><?= htmlspecialchars($product['description_grade'] ?? '') ?></p>
-                    <p><?= number_format((float) $product['prix_grade'], 2, ',', ' ') ?> &euro;</p>
+                    <p style="color: white;"><?= number_format((float) $product['prix_grade'], 2, ',', ' ') ?> &euro;</p>
                     </div>
 
                     <?php if ($product['owned']): ?>
