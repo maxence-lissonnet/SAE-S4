@@ -3,8 +3,8 @@
 <footer>
     <div>
         <a href="index.php?page=contact">Nous contacter</a>
-        <a href="index.php?page=about">Nous rejoindre</a>
-        <a href="index.php?page=actualite">Le département</a>
+        <a href="index.php?page=about">A propos du BDE</a>
+        <a href="index.php?page=actualite">Actualités</a>
         <a href="index.php?page=mentions_legales">Mentions légales</a>
     </div>
     <h2>ADIIL</h2>

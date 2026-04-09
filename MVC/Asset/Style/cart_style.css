@@ -100,8 +100,8 @@ H1 {
 }
 
 #article-cell img {
-    width: 15vh;
-    height: 15vh;
+    width: 80px;
+    height: 80px;
     overflow: hidden;
     border-radius: 20px;
 }
@@ -118,8 +118,8 @@ H1 {
 #cart-container tbody tr input {
     border-radius: 5px;
     border: 2px solid rgb(169, 169, 169);
-    width: 5vw;
-    height: 4vh;
+    width: 50px;
+    height: 35px;
     background-color: #1E1E1E;
     font-size: 16px;               
     color: white;  
@@ -171,4 +171,74 @@ H1 {
     margin: auto;
     margin-top: 50px;
     font-weight: bold;
+}
+
+/* Conteneur vertical */
+.action-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+}
+
+/* Style de base commun aux deux boutons */
+.btn-cart-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 110px; /* Largeur fixe pour qu'ils soient parfaitement alignés */
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.btn-cart-action img {
+    width: 14px;
+    height: 14px;
+}
+
+/* --- STYLE UPDATE (VERT) --- */
+.btn-update {
+    border: 1px solid rgb(119, 241, 190);
+    color: rgb(119, 241, 190);
+}
+
+.btn-update:hover {
+    background-color: rgb(119, 241, 190);
+    color: #1a1a1a;
+}
+
+.btn-update img {
+    filter: invert(75%) sepia(48%) saturate(464%) hue-rotate(106deg) brightness(101%) contrast(90%);
+}
+
+.btn-update:hover img {
+    filter: brightness(0);
+}
+
+/* --- STYLE SUPPRIMER (ROUGE) --- */
+.btn-delete {
+    border: 1px solid rgb(234, 91, 91);
+    color: rgb(234, 91, 91);
+}
+
+.btn-delete:hover {
+    background-color: rgb(234, 91, 91);
+    color: white;
+}
+
+/* Filtre pour rendre l'icône rouge (ajuste selon ton image de base) */
+.btn-delete img {
+    filter: invert(48%) sepia(46%) saturate(3207%) hue-rotate(326deg) brightness(95%) contrast(88%);
+}
+
+.btn-delete:hover img {
+    filter: brightness(1) invert(1); /* Devient blanc au survol */
 }

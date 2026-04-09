@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
     <title>Mot de passe oublie</title>
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/login_style.css">
 </head>
 

@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>Inscription - <?= htmlspecialchars($title) ?></title>
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/event_subscription_style.css">
 </head>
 
@@ -122,7 +118,7 @@
             });
         }
 
-        modePaiementSelect.addEventListener('change', function () {
+        modePaiementSelect.addEventListener('change', function() {
             updatePaymentMode(this.value);
         });
 

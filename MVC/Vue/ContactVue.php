@@ -2,16 +2,8 @@
 require_once __DIR__ . '/../Controller/HeaderController.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nous contacter</title>
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
-    <link rel="stylesheet" href="Asset/Style/header_style.css">
-    <link rel="stylesheet" href="Asset/Style/footer_style.css">
     <link rel="stylesheet" href="Asset/Style/info_page_style.css">
 </head>
 

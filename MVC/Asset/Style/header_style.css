@@ -67,5 +67,85 @@ header a:hover:not(#accueil){
     color: rgb(119, 241, 190);
 }
 
+/* --- STYLE DU BOUTON HAMBURGER --- */
+#mobile-menu-btn {
+    display: none; 
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+#mobile-menu-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color, white); 
+    border-radius: 5px;
+    transition: all 0.3s linear;
+}
+
+/* --- RESPONSIVE MOBILE (Sous les 1000px) --- */
+@media screen and (max-width: 1000px) {
+    
+    /* On affiche le bouton hamburger */
+    #mobile-menu-btn {
+        display: flex; 
+    }
+
+    /* Le menu de base devient une petite boîte noire cachée */
+    #main-nav {
+        display: none; /* Caché par défaut */
+        position: absolute;
+        top: 100%; /* Se place exactement en dessous du header */
+        right: 20px; /* S'aligne à droite, sous le burger */
+        background-color: #111111; /* Le fameux fond noir ! */
+        padding: 20px;
+        border-radius: 10px; /* Bords légèrement arrondis */
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5); /* Ombre pour détacher le menu du fond */
+        min-width: 180px; /* Largeur minimum du menu */
+        z-index: 1000; /* S'assure de passer par-dessus tout le reste du site */
+    }
+
+    /* Quand on clique sur le burger (ajout de la classe active par le JS) */
+    /* Le menu de base devient une petite boîte noire */
+    #main-nav {
+        display: none; 
+        position: absolute;
+        top: 100%; /* Pile en dessous du header */
+        right: 20px; /* Aligné à droite */
+        background-color: #111111; /* Fond noir */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+        
+        /* LA CORRECTION DE LA TAILLE EST ICI : */
+        width: max-content; /* S'adapte à la largeur des mots */
+        min-width: 200px; /* Largeur minimum pour faire joli */
+        height: auto; /* S'agrandit automatiquement vers le bas pour tout afficher */
+        max-height: 70vh; /* Si le menu est immense, il ne dépassera pas 70% de l'écran */
+        overflow-y: auto; /* Ajoute un scroll interne si besoin */
+        
+        z-index: 1000;
+    }
+
+    #main-nav.active {
+        display: block;
+    }
+
+    #main-nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px; /* L'espacement entre "Mon compte" et "Panel Admin", etc. */
+        margin: 0;
+        padding: 0;
+    }
+
+    
+}
 
 

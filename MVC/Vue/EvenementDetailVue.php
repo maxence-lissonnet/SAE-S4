@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($event['nom_evenement']); ?></title>
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
     <link rel="stylesheet" href="Asset/Style/event_details_style.css">
 </head>
 

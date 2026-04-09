@@ -1,14 +1,10 @@
 <?php
 require_once __DIR__ . '/../Controller/HeaderController.php';
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
     <title>Événements</title>
     <link rel="stylesheet" href="Asset/Style/events_style.css">
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
 </head>
 
 <body class="body_margin">

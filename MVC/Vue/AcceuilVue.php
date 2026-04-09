@@ -1,21 +1,10 @@
 <?php
 require_once __DIR__ . '/../Controller/HeaderController.php';
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <title>Accueil</title>
-
     <link rel="stylesheet" href="Asset/Style/index_style.css">
-    <link rel="stylesheet" href="Asset/Style/general_style.css">
-    <link rel="stylesheet" href="Asset/Style/header_style.css">
-    <link rel="stylesheet" href="Asset/Style/footer_style.css">
     <link rel="stylesheet" href="Asset/Style/bubble.css">
 
 </head>

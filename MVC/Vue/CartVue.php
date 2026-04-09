@@ -70,7 +70,17 @@
                                 </td>
                                 <td><?= number_format($sousTotal, 2, ',', ' ') ?> &euro;</td>
                                 <td>
-                                    <a href="index.php?page=cart&del=<?= $product['id_article'] ?>">Supprimer</a>
+                                    <div class="action-cell">
+                                        <a href="index.php?page=cart&del=<?= $product['id_article'] ?>" class="btn-cart-action btn-delete">
+                                            <img src="Asset/image/delete_icon.png" alt="">
+                                            Supprimer
+                                        </a>
+
+                                        <button type="submit" class="btn-cart-action btn-update" title="Mettre à jour">
+                                            <img src="Asset/image/save_logo.png" alt="">
+                                            Update
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
