@@ -39,5 +39,5 @@ export function getFileBucketUrl(filename){
         return filename;
     }
     
-    return `../../../api/files/${filename}`; 
+    return `../../../API/files/${filename}`; 
 }
