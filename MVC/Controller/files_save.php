@@ -15,7 +15,7 @@ function saveFile(): string | null
 
     $name = generateUUID() . '.' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-    if (move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . 'api/files/' . $name)) {
+    if (move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . '/../API/files/' . $name)) {
         return $name;
     }
 
@@ -45,8 +45,8 @@ function saveImage(): string | null
 
 function deleteFile(string $fileName): bool
 {
-    if (file_exists(__DIR__ . "api/files/" . $fileName)) {
-        unlink(__DIR__ . "api/files/" . $fileName);
+    if (file_exists(__DIR__ . "/../API/files/" . $fileName)) {
+        unlink(__DIR__ . "/../API/files/" . $fileName);
         return true;
     }
 

@@ -1,6 +1,6 @@
 <head>
     <title>Commander</title>
-    <link rel="stylesheet" href="assets/styles/order_style.css">
+    <link rel="stylesheet" href="Asset/Style/order_style.css">
 </head>
 
 <body class="body_margin">
@@ -12,7 +12,7 @@
     <div>
         <button id="cart-button">
             <a href="index.php?page=cart">
-                <img src="assets/fleche_retour.png" alt="Fleche de retour">
+                <img src="Asset/image/fleche_retour.png" alt="Fleche de retour">
                 Retourner au panier
             </a>
         </button>
@@ -34,17 +34,17 @@
                         <tr>
                             <td><?= htmlspecialchars($item['nom_article']) ?></td>
                             <td><?= $item['quantite'] ?></td>
-                            <td><?= number_format($item['prix_article'], 2, ',', ' ') ?> €</td>
-                            <td><?= number_format($item['prix_article'] * $item['quantite'], 2, ',', ' ') ?> €</td>
+                            <td><?= number_format((float) $item['prix_article'], 2, ',', ' ') ?> &euro;</td>
+                            <td><?= number_format($item['prix_article'] * $item['quantite'], 2, ',', ' ') ?> &euro;</td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
 
-            <h3>Total &nbsp : &nbsp<?= number_format($total, 2, ',', ' ') ?> €</h3>
+            <h3>Total &nbsp;: &nbsp;<?= number_format($total, 2, ',', ' ') ?> &euro;</h3>
 
             <?php if ($hasDiscount): ?>
-                <h3>Total après réductions &nbsp : &nbsp <?= number_format($totalWithReduc, 2, ',', ' ') ?> €</h3>
+                <h3>Total après réductions &nbsp;: &nbsp;<?= number_format($totalWithReduc, 2, ',', ' ') ?> &euro;</h3>
             <?php endif; ?>
         </div>
 
@@ -55,7 +55,9 @@
             <select id="mode_paiement" name="mode_paiement" required>
                 <option value="carte_credit">Carte de Crédit</option>
                 <option value="paypal">PayPal</option>
+                <option value="especes">Espèces</option>
             </select><br><br>
+            
 
             <div id="carte_credit" class="mode_paiement_fields">
                 <form method="POST" action="index.php?page=order">
@@ -83,20 +85,34 @@
                     <button type="submit" id="finalise-order-button">Valider la commande</button>
                 </form>
             </div>
+            <div id="especes" class="mode_paiement_fields" style="display: none;">
+                <form method="POST" action="index.php?page=order">
+                    <input type="hidden" name="mode_paiement" value="especes">
+
+                    <button type="submit" id="finalise-order-button">Valider la commande</button>
+                </form>
+            </div>
+
+                
+            </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('mode_paiement').addEventListener('change', function() {
-            var modePaiement = this.value;
-            if (modePaiement === 'carte_credit') {
-                document.getElementById('carte_credit').style.display = 'block';
-                document.getElementById('paypal').style.display = 'none';
-            } else if (modePaiement === 'paypal') {
-                document.getElementById('carte_credit').style.display = 'none';
-                document.getElementById('paypal').style.display = 'block';
-            }
+        const modePaiementSelect = document.getElementById('mode_paiement');
+        const paymentSections = document.querySelectorAll('.mode_paiement_fields');
+
+        function updatePaymentMode(modePaiement) {
+            paymentSections.forEach((section) => {
+                section.style.display = section.id === modePaiement ? 'block' : 'none';
+            });
+        }
+
+        modePaiementSelect.addEventListener('change', function () {
+            updatePaymentMode(this.value);
         });
+
+        updatePaymentMode(modePaiementSelect.value);
     </script>
 
     <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>

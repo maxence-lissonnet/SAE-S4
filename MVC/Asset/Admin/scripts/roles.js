@@ -59,17 +59,17 @@ async function saveRole(id_role){
     const data = {
         name: prop_nom_role.value === '' ? 'N/A' : prop_nom_role.value,
         permissions: {
-            p_log: getToggleStatus(prop_logs),
-            p_boutique: getToggleStatus(prop_boutique),
-            p_reunion: getToggleStatus(prop_reunions),
-            p_utilisateur: getToggleStatus(prop_users),
-            p_grade: getToggleStatus(prop_grades),
-            p_role: getToggleStatus(prop_roles),
-            p_actualite: getToggleStatus(prop_actualites),
-            p_evenement: getToggleStatus(prop_events),
-            p_comptabilite: getToggleStatus(prop_comptabilite),
-            p_achat: getToggleStatus(prop_historique),
-            p_moderation: getToggleStatus(prop_moderation)
+            p_log_role: getToggleStatus(prop_logs),
+            p_boutique_role: getToggleStatus(prop_boutique),
+            p_reunion_role: getToggleStatus(prop_reunions),
+            p_utilisateur_role: getToggleStatus(prop_users),
+            p_grade_role: getToggleStatus(prop_grades),
+            p_roles_role: getToggleStatus(prop_roles),
+            p_actualite_role: getToggleStatus(prop_actualites),
+            p_evenements_role: getToggleStatus(prop_events),
+            p_comptabilite_role: getToggleStatus(prop_comptabilite),
+            p_achats_role: getToggleStatus(prop_historique),
+            p_moderation_role: getToggleStatus(prop_moderation)
         }
     };
 
@@ -125,17 +125,17 @@ async function selectRole(id_role, li){
 
     // Update displayed information
     prop_nom_role.value = role.nom_role;
-    updateToggleStatus(prop_logs, role.p_log);
-    updateToggleStatus(prop_boutique, role.p_boutique);
-    updateToggleStatus(prop_users, role.p_utilisateur);
-    updateToggleStatus(prop_grades, role.p_grade);
-    updateToggleStatus(prop_roles, role.p_role);
-    updateToggleStatus(prop_actualites, role.p_actualite);
-    updateToggleStatus(prop_events, role.p_evenement);
-    updateToggleStatus(prop_comptabilite, role.p_comptabilite);
-    updateToggleStatus(prop_historique, role.p_achat);
-    updateToggleStatus(prop_moderation, role.p_moderation);
-    updateToggleStatus(prop_reunions, role.p_reunion);
+    updateToggleStatus(prop_logs, role.p_log_role);
+    updateToggleStatus(prop_boutique, role.p_boutique_role);
+    updateToggleStatus(prop_users, role.p_utilisateur_role);
+    updateToggleStatus(prop_grades, role.p_grade_role);
+    updateToggleStatus(prop_roles, role.p_roles_role);
+    updateToggleStatus(prop_actualites, role.p_actualite_role);
+    updateToggleStatus(prop_events, role.p_evenements_role);
+    updateToggleStatus(prop_comptabilite, role.p_comptabilite_role);
+    updateToggleStatus(prop_historique, role.p_achats_role);
+    updateToggleStatus(prop_moderation, role.p_moderation_role);
+    updateToggleStatus(prop_reunions, role.p_reunion_role);
 
     // Update save button
     save_btn.onclick = ()=>{

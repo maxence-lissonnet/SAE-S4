@@ -21,15 +21,18 @@ require_once __DIR__ . '/../Controller/HeaderController.php';
     <?php if (!empty($products)): ?>
         <div id="product-list">
             <?php foreach ($products as $product): ?>
-                <div class="product-card">
-                    <img src="<?= $product['image_grade'] ? 'api/files/' . $product['image_grade'] : 'admin/ressources/default_images/grade.webp' ?>" alt="Image">
+                <div id="one-product">
+                    <div>
+                    <img src="<?= htmlspecialchars($product['resolved_image_grade']) ?>" alt="Image du grade">
                     <h3><?= htmlspecialchars($product['nom_grade']) ?></h3>
-                    <p><?= number_format($product['prix_grade'], 2, ',', ' ') ?> €</p>
+                    <p><?= htmlspecialchars($product['description_grade'] ?? '') ?></p>
+                    <p><?= number_format((float) $product['prix_grade'], 2, ',', ' ') ?> &euro;</p>
+                    </div>
 
                     <?php if ($product['owned']): ?>
-                        <button disabled>Déjà détenu</button>
+                        <button id="detention" disabled>Déjà détenu</button>
                     <?php else: ?>
-                        <a href="index.php?page=grade_subscription&id=<?= $product['id_grade'] ?>">Acheter</a>
+                        <a id="buy-button" href="index.php?page=grade_subscription&id=<?= $product['id_grade'] ?>">Acheter</a>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>

@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$categories_disponibles = $boutiqueModel->get_categories();
 $products = $boutiqueModel->get_filtered_products($searchTerm, $filters, $orderBy);
 
 $defaultProductImage = 'Asset/image/boutique.png';

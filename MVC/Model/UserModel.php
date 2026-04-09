@@ -78,6 +78,12 @@ class UserModel
         return $stmt->execute([$hashedPassword, $userId]);
     }
 
+    public function updatePasswordByEmail($email, $hashedPassword)
+    {
+        $stmt = $this->db->prepare("UPDATE MEMBRE SET password_membre = ? WHERE email_membre = ?");
+        return $stmt->execute([$hashedPassword, $email]);
+    }
+
 
     //Historique d'achats
 

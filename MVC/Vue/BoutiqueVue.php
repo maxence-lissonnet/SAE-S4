@@ -17,9 +17,10 @@
             <details <?= !empty($filters) ? 'open' : '' ?>>
                 <summary>Cat&eacute;gories</summary>
                 <fieldset>
-                    <?php foreach (['Sucré', 'Salé', 'Boisson', 'Merch'] as $cat) : ?>
+                    <?php foreach ($categories_disponibles as $cat) : ?>
                         <label>
-                            <input type="checkbox" name="category[]" value="<?= $cat ?>" <?= in_array($cat, $filters, true) ? 'checked' : '' ?>> <?= $cat ?>
+                            <input type="checkbox" name="category[]" value="<?= htmlspecialchars($cat) ?>" <?= in_array($cat, $filters, true) ? 'checked' : '' ?>>
+                            <?= htmlspecialchars($cat) ?>
                         </label><br>
                     <?php endforeach; ?>
                 </fieldset>
@@ -29,6 +30,8 @@
                 <option value="name_asc" <?= $orderBy === 'name_asc' ? 'selected' : '' ?>>A-Z</option>
                 <option value="price_asc" <?= $orderBy === 'price_asc' ? 'selected' : '' ?>>Prix croissant</option>
             </select>
+
+            <button type="submit" name="filter">Filtrer</button>
             <button type="submit" name="reset">R&eacute;initialiser</button>
         </form>
 
@@ -70,8 +73,7 @@
         <?php endif; ?>
     </div>
 
-    <?php require_once 'footerVue.php'; ?>
-    <script src="scripts/add_cart.js"></script>
+    <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
 </body>
 
 </html>

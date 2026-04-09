@@ -261,7 +261,7 @@ input, select{
     padding: 10px;
     font-size: 14px;
     font-weight: normal;
-    color: var(--text-lighter);
+    color: black;
     outline: none;
     width: 100%;
 }

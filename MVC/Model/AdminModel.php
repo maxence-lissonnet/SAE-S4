@@ -51,6 +51,12 @@ class AdminModel
                 'permission' => 'p_evenement',
             ],
             [
+                'key' => 'inscriptions',
+                'label' => 'Inscriptions',
+                'icon' => 'events.svg',
+                'permission' => 'p_evenement',
+            ],
+            [
                 'key' => 'comptabilite',
                 'label' => 'Comptabilite',
                 'icon' => 'comptabilite.svg',

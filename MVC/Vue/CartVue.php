@@ -13,9 +13,7 @@
 </head>
 
 <body class="body_margin">
-    <?php
-    require_once __DIR__ . "/../Controller/HeaderController.php";
-    ?>
+    <?php require_once __DIR__ . "/../Controller/HeaderController.php"; ?>
 
     <div>
         <h1>MON PANIER</h1>
@@ -63,14 +61,14 @@
                             ?>
                             <tr>
                                 <td id='article-cell'>
-                                    <img src="api/files/<?= htmlspecialchars($product['image_article']) ?>" alt="Image de l'article" />
+                                    <img src="<?= htmlspecialchars($product['resolved_image_article']) ?>" alt="Image de l'article" />
                                     <p><?= htmlspecialchars($product['nom_article']) ?></p>
                                 </td>
-                                <td><?= number_format(htmlspecialchars($product['prix_article']), 2, ',', ' ') ?> €</td>
+                                <td><?= number_format((float) $product['prix_article'], 2, ',', ' ') ?> &euro;</td>
                                 <td>
-                                    <input type='text' name="cart[quantity][<?= $product['id_article'] ?>]" value="<?= htmlspecialchars($qty) ?>" onkeydown="pressEnter(event)">
+                                    <input type='text' name="cart[quantity][<?= $product['id_article'] ?>]" value="<?= htmlspecialchars((string) $qty) ?>" onkeydown="pressEnter(event)">
                                 </td>
-                                <td><?= number_format($sousTotal, 2, ',', ' ') ?> €</td>
+                                <td><?= number_format($sousTotal, 2, ',', ' ') ?> &euro;</td>
                                 <td>
                                     <a href="index.php?page=cart&del=<?= $product['id_article'] ?>">Supprimer</a>
                                 </td>
@@ -84,13 +82,13 @@
                         </tr>
                         <tr>
                             <th>Total &nbsp;: </th>
-                            <td><?= number_format($cart->total(), 2, ',', ' ') ?> €</td>
+                            <td><?= number_format($cart->total(), 2, ',', ' ') ?> &euro;</td>
                         </tr>
 
                         <?php if ($totalAvecReduc !== null) : ?>
                             <tr>
                                 <th style="min-width: 400px">Total après réductions (-<?= $reductionPercent ?>%) &nbsp;: </th>
-                                <td style="min-width: 50px"><?= number_format($totalAvecReduc, 2, ',', ' ') ?> €</td>
+                                <td style="min-width: 50px"><?= number_format($totalAvecReduc, 2, ',', ' ') ?> &euro;</td>
                             </tr>
                         <?php endif; ?>
                     </tfoot>
@@ -112,9 +110,7 @@
         <p id="empty-cart">Votre panier est vide</p>
     <?php endif; ?>
 
-    <?php
-    require_once __DIR__ . "/../Controller/FooterController.php";
-    ?>
+    <?php require_once __DIR__ . "/../Controller/FooterController.php"; ?>
 </body>
 
 </html>
