@@ -81,19 +81,54 @@ footer {
     transition: all 0.3s ease;
 }
 
+.event-details form.subscription {
+    width: 100%;
+}
+
 .event-details button:hover {
     background-color: #5A0099;
     transform: scale(1.05);
 }
 
-#passed_subscription {
+.event-details .subscription-cancel {
+    background-color: #a12727;
+}
+
+.event-details .subscription-cancel:hover {
+    background-color: #c33838;
+}
+
+.subscription-disabled {
     background-color: #757a76;
     cursor: default;
 }
 
-#passed_subscription:hover {
+.subscription-disabled:hover {
     background-color: #757a76;
-    transform: scale(1.05);
+    transform: none;
+}
+
+.event-details .event-notice {
+    width: fit-content;
+    max-width: 60%;
+    margin: 12px 0 24px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.event-details .event-notice.success {
+    background-color: rgba(64, 180, 141, 0.2);
+    border: 1px solid rgba(64, 180, 141, 0.8);
+    color: rgb(182, 248, 224);
+}
+
+.event-details .event-notice.error {
+    background-color: rgba(161, 39, 39, 0.25);
+    border: 1px solid rgba(161, 39, 39, 0.8);
+    color: #ffd3d3;
 }
 
 .event-details li {

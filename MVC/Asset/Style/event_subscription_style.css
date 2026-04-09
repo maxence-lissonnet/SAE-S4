@@ -1,8 +1,4 @@
-/**************************
-******  Inscription  ******
-***************************/
-
-H1 {
+h1 {
     font-size: 4.5em;
     letter-spacing: 15px;
     line-height: 100px;
@@ -10,131 +6,170 @@ H1 {
     font-family: "Koulen", sans-serif;
 }
 
-#cart-button {
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: rgb(119, 241, 190);
-    background-color: #1E1E1E;
-    margin-top: 30px;
+.subscription-page {
+    max-width: 1280px;
+    margin: 60px auto 0;
 }
 
-#cart-button a {
-    display: flex;
+.back-link {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-around;
-    text-decoration: none; /* Supprime le soulignement */
-    color: inherit;
-    width: 100%;
-    height: 100%;
-    gap : 10px;
+    gap: 12px;
+    color: rgb(119, 241, 190);
+    text-decoration: none;
+    font-size: 1.2em;
 }
 
-#cart-button img {
+.back-link img {
     width: 30px;
     height: 30px;
 }
 
-
-div:nth-of-type(2){
-    align-self: center;
-    margin: auto;
-    margin-top: 80px;
+.subscription-error {
+    margin-top: 24px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background-color: rgba(161, 39, 39, 0.25);
+    border: 1px solid rgba(161, 39, 39, 0.8);
+    color: #ffd3d3;
 }
 
-div:nth-of-type(2) div:first-of-type table thead th {
-    padding: 20px;
+.subscription-layout {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    margin-top: 50px;
 }
 
-div:nth-of-type(2) div:first-of-type table tbody tr {
+.subscription-summary {
+    flex: 1 1 60%;
+}
+
+.subscription-summary table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.subscription-summary th,
+.subscription-summary td {
+    padding: 18px 12px;
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-div:nth-of-type(2) div:first-of-type h3{
-    margin-top: 10px;
-    border-top: 1px solid white;
-    padding-top: 10px;
-    text-align:end;
+.totals {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
 }
 
-div:nth-of-type(2) form {
-    align-self: flex-start;
-    margin: auto;
-    margin-top: 60px;
+.totals h3 {
+    margin: 0;
 }
 
-div:nth-of-type(2) div:nth-of-type(2) h3 {
+.payment-section {
+    flex: 0 0 360px;
+}
+
+.payment-section h3 {
+    margin-top: 0;
+    margin-bottom: 24px;
     text-align: center;
-    margin-bottom: 30px;
     font-size: 1.8em;
 }
 
-div:nth-of-type(2) div:nth-of-type(2) label{
-    border-radius: 5px;
+.payment-section > label {
+    display: block;
+    margin-bottom: 10px;
     color: rgb(169, 169, 169);
-    font-size: 1.2em;
-    margin-right: 5px;               
+    font-size: 1.05em;
 }
 
-div:nth-of-type(2) div:nth-of-type(2) select{
-    all: unset;
+.payment-section select {
+    width: 100%;
     border: 2px solid rgb(169, 169, 169);
-    background-color: #1E1E1E;
-    border-radius: 5px;
-    padding: 0.80vh 2.5vh 0.80vh 1vh;
-    background: #1E1E1E url('../image/chevron_logo.png') no-repeat right 4px center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-sizing: border-box;
+    background: #1E1E1E url('../image/chevron_logo.png') no-repeat right 12px center;
     background-size: 12px 12px;
+    border-radius: 8px;
+    color: white;
+    padding: 12px 40px 12px 12px;
+    cursor: pointer;
 }
 
-div:nth-of-type(2) div:nth-of-type(2) div form input{
-    border-radius: 5px;
+.payment-section select::-ms-expand {
+    display: none;
+}
+
+.mode_paiement_fields form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.payment-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: rgb(169, 169, 169);
+}
+
+.payment-field input {
+    border-radius: 8px;
     border: 2px solid rgb(169, 169, 169);
     background-color: #1E1E1E;
-    font-size: 16px;               
-    color: white;  
-    padding-left: 2vh;
-    height: 3vh;
+    font-size: 16px;
+    color: white;
+    padding: 12px 14px;
 }
 
-div:nth-of-type(2) div:nth-of-type(2) div form {
-    margin-top: 0px;
-}
-
-div:nth-of-type(2) div:nth-of-type(2) div {
-    margin-top: 0px;
-}
-
-#paypal-button {
-    display: flex;
-    flex-direction: row;
-    padding: 1vh;
-    border-radius: 10px;
-    border: none;
-    font-size: 1em;
+.paypal-button,
+.validate-button {
+    display: inline-flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: none;
     cursor: pointer;
-    background-color:  #1E1E1E;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.paypal-button {
+    background-color: #1E1E1E;
     color: rgb(119, 241, 190);
-    margin: auto;
-    margin-top: 10px;
+    border: 1px solid rgb(119, 241, 190);
 }
 
-#finalise-order-button {
-    display: flex;
-    flex-direction: row;
-    padding: 1vh;
-    border-radius: 10px;
-    border: none;
-    font-size: 1.5em;
-    align-items: center;
-    justify-content: space-around;
-    cursor: pointer;
-    width: 270px;
-    height: 60px;
-    background-color:  rgb(119, 241, 190);
+.validate-button {
+    background-color: rgb(119, 241, 190);
     color: #1E1E1E;
-    margin: auto;
-    margin-top: 50px;
-    font-weight: bold;
+    min-height: 56px;
+}
+
+.cash-note {
+    margin: 0;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgb(210, 210, 210);
+    line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+    .subscription-layout {
+        flex-direction: column;
+    }
+
+    .payment-section {
+        width: 100%;
+        flex-basis: auto;
+    }
 }
