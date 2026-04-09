@@ -12,7 +12,7 @@ H1 {
 }
 
 
-/***Ensemble des différents éléments pour filter, trier et rechercher les produits ainsi que le bouton poour accéder au panier***/
+/***Ensemble des diffÃ©rents Ã©lÃ©ments pour filter, trier et rechercher les produits ainsi que le bouton poour accÃ©der au panier***/
 
 #principal-section{
     display : flex;
@@ -56,7 +56,7 @@ H1 {
     background-size: 20px 20px;
 }
 
-#search-input:not(:placeholder-shown) { /* Lorsque le champ est rempli, on cache l'icône */
+#search-input:not(:placeholder-shown) { /* Lorsque le champ est rempli, on cache l'icÃ´ne */
     background-image: none;
     padding-left: 2vh;
 }
@@ -211,7 +211,24 @@ H1 {
     color: rgb(169, 169, 169);
 }
 
+#one-product div:first-of-type .stock-label {
+    width: 100%;
+    margin: 10px auto 12px;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    align-self: stretch;
+    text-align: center;
+    line-height: 1.3;
+}
 
+#one-product div:first-of-type .stock-label.available {
+    color: rgb(119, 241, 190);
+}
+
+#one-product div:first-of-type .stock-label.empty {
+    color: rgb(215, 126, 126);
+}
 
 #stock-status{
     font-size: 1.2em;

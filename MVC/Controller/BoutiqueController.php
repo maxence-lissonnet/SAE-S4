@@ -92,14 +92,24 @@ $resolveProductImage = static function ($imagePath, $productName) use ($defaultP
 
 $products = array_map(
     static function ($product) use ($resolveProductImage) {
+        $stock = isset($product['stock_article']) ? (int) $product['stock_article'] : 0;
+
         $product['resolved_image_article'] = $resolveProductImage(
             $product['image_article'] ?? null,
             $product['nom_article'] ?? null
         );
+        $product['stock_article'] = $stock;
+        $product['is_available'] = $stock !== 0;
+        $product['stock_label'] = match (true) {
+            $stock < 0 => 'Stock illimite',
+            $stock === 0 => null,
+            $stock === 1 => '1 restant',
+            default => $stock . ' restants',
+        };
+
         return $product;
     },
     $products
 );
 
-// Chargement de la vue
 require_once __DIR__ . '/../Vue/BoutiqueVue.php';

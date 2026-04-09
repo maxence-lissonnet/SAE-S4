@@ -59,17 +59,22 @@
                                 <span>*</span>
                             <?php endif; ?>
                         </p>
+                        <?php if ($product['is_available'] && !empty($product['stock_label'])): ?>
+                            <p class="stock-label available" style="font-size: 0.68em; text-align: center; width: 100%; display: block; line-height: 1.2; margin: 10px auto 12px;">
+                                <?= htmlspecialchars($product['stock_label']) ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
-                    <?php if ($product['stock_article'] != 0): ?>
+                    <?php if ($product['is_available']): ?>
                         <a class="addCart" id="add-to-cart-button" href="index.php?page=add_cart&id=<?= $product['id_article'] ?>">Ajouter au panier</a>
                     <?php else: ?>
-                        <button disabled>Épuisé</button>
+                        <button id="out-of-stock" disabled>&Eacute;puis&eacute;</button>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <p>Aucun produit trouvé.</p>
+            <p>Aucun produit trouv&eacute;.</p>
         <?php endif; ?>
     </div>
 
