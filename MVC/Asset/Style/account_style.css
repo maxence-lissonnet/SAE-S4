@@ -13,28 +13,17 @@ H2 {
 
 #account-generalInfo {
     border-radius: 10px;
-    width: 60%;
     height: 20vh;
     display: flex;
     flex-direction: row;
     padding: 2vh;
-    align-self: center;
     margin: auto;
     justify-content: space-around;
-    align-items:stretch;
+    align-items: center;
     background-color: rgb(23, 23, 23);
     margin-top: 80px;
     margin-bottom: 60px;
     box-shadow: 10px 7px 4px rgba(0, 0, 0, 0.107);
-}
-
-#account-generalInfo div:first-of-type {
-    display : flex;
-    flex-direction: row;
-}
-
-#account-generalInfo div:first-of-type div {
-    align-self: center;
 }
 
 #cadre-pp {
@@ -68,68 +57,106 @@ H2 {
     height: 3vh;
 }
 
-
-#account-generalInfo div:nth-of-type(2){
+#account-generalInfo div:nth-of-type(2) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
 
-#account-generalInfo div:nth-of-type(2) p:nth-child(1){
+#account-generalInfo div:nth-of-type(2) p:nth-child(1) {
     font-size: 75px;
     font-weight: 500;
 }
 
-#account-generalInfo div:nth-of-type(2) p:nth-child(2){
+#account-generalInfo div:nth-of-type(2) p:nth-child(2) {
     font-size: 45px;
 }
 
-#account-generalInfo div:nth-of-type(3){
+#account-generalInfo div:nth-of-type(3) {
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
 }
 
-#account-generalInfo div:nth-of-type(3) p{
+#account-generalInfo div:nth-of-type(3) p {
     font-size: 35px;
     font-weight: 500;
 }
 
 #cadre-grade {
-    width: 200px;
-    height: 200px;
     overflow: hidden;
     margin-top: 2vh;
 }
 
-#cadre-grade img{
+#cadre-grade p {
+    font-size: 30px !important;
+}
+
+#cadre-grade img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-
-#account-personalInfo-form {
-    border-radius: 10px;
-    width: 60%;
-    height: 15vh;
-    display: flex;
-    flex-direction: row;
-    padding: 2vh;
-    align-self: center;
-    margin: auto;
-    justify-content: space-between;
-    align-items:center;
-    background-color: rgb(23, 23, 23);
-    margin-bottom: 60px;
-    padding-left: 5vh;
-    padding-right: 5vh;
-    box-shadow: 10px 7px 4px rgba(0, 0, 0, 0.107);
+#xp {
+    font-size: 30px;
 }
 
-#account-personalInfo-form button{
+#account-personalInfo-form {
+    gap: 40px;
+    background-color: rgb(23, 23, 23);
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 60px;
+    height: auto;
+    box-shadow: 10px 7px 4px rgba(0, 0, 0, 0.107);
+
+}
+
+#account-personalInfo-form p {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+#fields-group {
+    display: flex;
+    flex-direction: row;
+    /* Aligne les deux groupes côte à côte */
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Aligne les groupes par le haut */
+    gap: 40px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    /* Aligne les champs à l'intérieur du groupe verticalement */
+    flex: 1;
+    /* Permet aux deux colonnes d'avoir la même largeur */
+    gap: 15px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    /* Garde le label au dessus de son input */
+    gap: 5px;
+}
+
+/* Pour que les inputs prennent toute la place dans leur colonne */
+.field input,
+.field select {
+    padding: 8px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* Important pour que le padding ne casse pas la largeur */
+}
+
+#account-personalInfo-form button {
     display: flex;
     flex-direction: row;
     all: unset;
@@ -139,48 +166,27 @@ H2 {
     padding: 0vh;
 }
 
-#account-personalInfo-form button img{
+#account-personalInfo-form button img {
     width: 3vh;
     height: 3vh;
 }
 
-#account-personalInfo-form div {
-    display: flex;
-    flex-direction: row;
-    width: 80vh;
-    align-items: space-around;
-    padding: 0vh;
-}
 
-#account-personalInfo-form div div:first-of-type, 
-#account-personalInfo-form div div:nth-of-type(2){
-    display: flex;
-    flex-direction: column;
-    gap: 1.5vh;
-}
 
-#account-personalInfo-form input{
+#account-personalInfo-form input {
     border-radius: 5px;
     border: 2px solid rgb(169, 169, 169);
-    width: 15vh;
+    width: 300px;
     height: 4vh;
     background-color: #1E1E1E;
-    font-size: 16px;               
-    color: white;  
+    font-size: 16px;
+    color: white;
     padding-left: 2vh;
 }
 
-#account-personalInfo-form div div:nth-of-type(1) input:nth-of-type(2){
-    width: 20vh;
-}
-
-#account-personalInfo-form div:nth-of-type(2) input{
-    width: 31vh;
-}
-
-#account-personalInfo-form select{
+#account-personalInfo-form select {
     all: unset;
-    width: 7vh;
+    width: 100px;
     border: 2px solid rgb(169, 169, 169);
     background-color: #1E1E1E;
     border-radius: 5px;
@@ -192,58 +198,45 @@ H2 {
 
 #account-editPass-form {
     border-radius: 10px;
-    width: 60%;
-    height: 15vh;
-    display: flex;
-    flex-direction: row;
-    padding: 2vh;
-    align-self: center;
-    margin: auto;
-    justify-content: space-between;
-    align-items:center;
     background-color: rgb(23, 23, 23);
-    margin-bottom: 60px;
-    padding-left: 5vh;
-    padding-right: 5vh;
     box-shadow: 10px 7px 4px rgba(0, 0, 0, 0.107);
-
-}
-
-#account-editPass-form div {
+    width: auto;
+    height: auto;
     display: flex;
-    flex-direction: row;
-    width: 80vh;
-    align-items: space-around;
-    padding: 0vh;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    margin-bottom: 60px;
 }
 
-#account-editPass-form  div div:first-of-type, 
-#account-editPass-form div div:nth-of-type(2){
+#account-editPass-form p {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+#inputs {
     display: flex;
     flex-direction: column;
     gap: 1.5vh;
     justify-content: space-between;
 }
 
-#account-editPass-form  div div:first-of-type p{
-    font-size: 1.5em;
-    color: rgb(169, 169, 169);
-}
-
-#account-editPass-form div input{
+#account-editPass-form div input {
     border-radius: 5px;
     border: 2px solid rgb(169, 169, 169);
-    width: 35vh;
+    width: 300px;
     height: 4vh;
     background-color: #1E1E1E;
-    font-size: 16px;               
-    color: white;  
+    font-size: 16px;
+    color: white;
     padding-left: 2vh;
-
 }
 
+#save {
+    align-self: flex-end;
+}
 
-#account-editPass-form button{
+#account-editPass-form button {
     display: flex;
     flex-direction: row;
     all: unset;
@@ -252,7 +245,7 @@ H2 {
     align-self: flex-end;
 }
 
-#account-editPass-form button img{
+#account-editPass-form button img {
     width: 3vh;
     height: 3vh;
 }
@@ -264,14 +257,13 @@ H2 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 60%;
     height: 6vh;
     align-self: center;
     margin: auto;
     margin-bottom: 11.69vh;
 }
 
-#buttons-section button{
+#buttons-section button {
     display: flex;
     flex-direction: row;
     padding: 1vh;
@@ -286,24 +278,25 @@ H2 {
 
 
 /*** ---> Discord***/
-#buttons-section > button:first-of-type {
+#buttons-section>button:first-of-type {
     width: 23vh;
     height: 6vh;
-    background-color:  rgb(91, 101, 234);
+    background-color: rgb(91, 101, 234);
     color: white;
 }
 
-#buttons-section > button:first-of-type a {
+#buttons-section>button:first-of-type a {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    text-decoration: none; /* Supprime le soulignement */
+    text-decoration: none;
+    /* Supprime le soulignement */
     color: inherit;
     width: 100%;
     height: 100%;
 }
 
-#buttons-section > button:first-of-type img {
+#buttons-section>button:first-of-type img {
     width: 40px;
     height: 40px;
     margin: 1vh;
@@ -315,7 +308,7 @@ H2 {
 #buttons-section form:first-of-type button {
     width: 18vh;
     height: 6vh;
-    background-color:  rgb(119, 241, 190);
+    background-color: rgb(119, 241, 190);
     color: #1E1E1E;
 }
 
@@ -329,7 +322,7 @@ H2 {
 #buttons-section form:nth-of-type(2) button {
     width: 23vh;
     height: 6vh;
-    background-color:  rgb(234, 91, 91);
+    background-color: rgb(234, 91, 91);
     color: white;
 }
 
@@ -385,7 +378,7 @@ H2 {
 
 #historique-achats table th {
     background-color: #1E1E1E;
-    color:white;
+    color: white;
     padding: 20px;
     font-weight: bold;
     text-align: center;
@@ -407,7 +400,7 @@ H2 {
 
 /* Style du bouton */
 
-#viewAll-form{
+#viewAll-form {
     align-self: flex-end;
     background-color: none;
 }

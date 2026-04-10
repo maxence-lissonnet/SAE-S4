@@ -68,13 +68,10 @@
                     </button>
                 </form>
             </div>
-            <div>
-                <p><?= htmlspecialchars((string) $infoUser['xp_membre']) ?></p>
-                <p>XP</p>
-            </div>
+            <p id="xp"><?= htmlspecialchars((string) $infoUser['xp_membre']) ?> XP</p>
             <div id="cadre-grade">
                 <?php if (empty($infoUser['nom_grade'])): ?>
-                    <p>Vous n'avez pas de grade</p>
+                    <p>Aucun grade</p>
                 <?php else: ?>
                     <p><?= htmlspecialchars($infoUser['nom_grade']) ?></p>
                     <img src="<?= htmlspecialchars($gradeImageUrl) ?>" alt="Illustration du grade" />
@@ -83,41 +80,53 @@
         </div>
 
         <form method="POST" action="index.php?page=account" id="account-personalInfo-form">
-            <div>
-                <div>
-                    <input type="text" id="name" name="name" placeholder="Prénom" value="<?= htmlspecialchars($infoUser['prenom_membre'] ?? '') ?>" required>
-                    <input type="text" id="lastName" name="lastName" placeholder="Nom de famille" value="<?= htmlspecialchars($infoUser['nom_membre'] ?? '') ?>" required>
+            <p>Modification des informations personnelles</p>
+            <div id="fields-group">
+                <div class="field-group">
+                    <div class="field">
+                        <label for="name">Prénom</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div class="field">
+                        <label for="lastName">Nom de famille</label>
+                        <input type="text" id="lastName">
+                    </div>
                 </div>
-                <div>
-                    <input type="email" id="mail" name="mail" placeholder="Adresse mail" value="<?= htmlspecialchars($infoUser['email_membre'] ?? '') ?>" required>
 
+                <div class="field-group">
+                    <div class="field">
+                        <label for="mail">Adresse mail</label>
+                        <input type="email" id="mail">
+                    </div>
                     <?php if (!empty($infoUser['tp_membre'])): ?>
-                        <select id="tp" name="tp">
-                            <?php foreach (['11A', '11B', '12C', '12D', '21A', '21B', '22C', '22D', '31A', '31B', '32C', '32D'] as $tpOption): ?>
-                                <option value="<?= $tpOption ?>" <?= ($infoUser['tp_membre'] === $tpOption) ? 'selected' : '' ?>>TP <?= $tpOption ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <div class="field">
+                            <label for="tp">Groupe TP</label>
+                            <select id="tp" name="tp"><?php foreach (['11A', '11B', '12C', '12D', '21A', '21B', '22C', '22D', '31A', '31B', '32C', '32D'] as $tpOption): ?>
+                                    <option value="<?= $tpOption ?>" <?= ($infoUser['tp_membre'] === $tpOption) ? 'selected' : '' ?>>TP <?= $tpOption ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     <?php endif; ?>
                 </div>
+                <button type="submit" id="save"><img src="Asset/image/save_logo.png" alt="Logo enregistrer" /></button>
             </div>
 
-            <button type="submit">
-                <img src="Asset/image/save_logo.png" alt="Logo enregistrer les modifications" />
-            </button>
+
         </form>
 
         <form method="POST" action="index.php?page=account" id="account-editPass-form">
-            <div>
-                <div>
-                    <p>Modifier mon mot de passe :</p>
-                    <input type="password" id="mdp" name="mdp" placeholder="Mot de passe actuel">
-                </div>
-                <div>
-                    <input type="password" id="newMdp" name="newMdp" placeholder="Nouveau mot de passe" required>
-                    <input type="password" id="newMdpVerif" name="newMdpVerif" placeholder="Confirmation du nouveau mot de passe" required>
-                </div>
+            <p>Changement du mot de passe</p>
+            <div id="inputs">
+                <label for="mdp">Mot de passe actuel</label>
+                <input type="password" id="mdp" name="mdp">
+                <label for="newMdp">Nouveau mot de passe</label>
+                <input type="password" id="newMdp" name="newMdp" required>
             </div>
-            <button type="submit"><img src="Asset/image/save_logo.png" alt="Logo enregistrer" /></button>
+            <div id="inputs">
+                <label for="newMdpVerif">Confirmation du mot de passe</label>
+                <input type="password" id="newMdpVerif" name="newMdpVerif" required>
+            </div>
+            <button type="submit" id="save"><img src="Asset/image/save_logo.png" alt="Logo enregistrer" /></button>
         </form>
     </section>
 

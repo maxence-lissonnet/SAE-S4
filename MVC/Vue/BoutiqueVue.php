@@ -10,9 +10,8 @@
 
     <div id="principal-section">
         <form method="post" id="filter-form" action="index.php?page=boutique">
-            <fieldset>
-                <input id="search-input" type="text" name="search" placeholder="Rechercher..." value="<?= htmlspecialchars($searchTerm) ?>">
-            </fieldset>
+
+            <input id="search-input" type="text" name="search" placeholder="Rechercher..." value="<?= htmlspecialchars($searchTerm) ?>">
 
             <details <?= !empty($filters) ? 'open' : '' ?>>
                 <summary>Cat&eacute;gories</summary>
@@ -26,13 +25,13 @@
                 </fieldset>
             </details>
 
-            <select name="sort">
+            <select name="sort" id="selector">
                 <option value="name_asc" <?= $orderBy === 'name_asc' ? 'selected' : '' ?>>A-Z</option>
                 <option value="price_asc" <?= $orderBy === 'price_asc' ? 'selected' : '' ?>>Prix croissant</option>
             </select>
 
-            <button type="submit" name="filter">Filtrer</button>
-            <button type="submit" name="reset">R&eacute;initialiser</button>
+            <button type="submit" name="filter" class="btn-filter">Filtrer</button>
+            <button type="submit" name="reset" class="btn-filter">R&eacute;initialiser</button>
         </form>
 
         <div id="cart-info">

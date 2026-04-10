@@ -14,11 +14,16 @@ H1 {
 
 /***Ensemble des différents éléments pour filter, trier et rechercher les produits ainsi que le bouton poour accéder au panier***/
 
-#principal-section{
-    display : flex;
+#principal-section {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 60px;
+}
+
+#selector {
+    height: 20px;
+    font-family: 'Inter', sans-serif;
 }
 
 
@@ -32,14 +37,8 @@ H1 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-content: center;
+    align-items: center;
     gap: 20px;
-    width: 65vw;
-}
-
-
-#filter-form fieldset{
-    all: unset;
 }
 
 #search-input {
@@ -47,8 +46,8 @@ H1 {
     border: 2px solid rgb(169, 169, 169);
     height: 4vh;
     background-color: #1E1E1E;
-    font-size: 16px;               
-    color: white;  
+    font-size: 16px;
+    color: white;
     padding-left: 40px;
     background-image: url("../image/logo_recherche.png");
     background-position: 10px center;
@@ -56,23 +55,24 @@ H1 {
     background-size: 20px 20px;
 }
 
-#search-input:not(:placeholder-shown) { /* Lorsque le champ est rempli, on cache l'icône */
+#search-input:not(:placeholder-shown) {
+    /* Lorsque le champ est rempli, on cache l'icône */
     background-image: none;
     padding-left: 2vh;
 }
 
 
-#filter-form div:first-of-type{
+#filter-form div:first-of-type {
     display: flex;
     flex-direction: row;
     height: 4vh;
 }
 
-#filter-form div:first-of-type label{
+#filter-form div:first-of-type label {
     width: 100px;
 }
 
-#filter-form div:first-of-type select{
+#filter-form div:first-of-type select {
     all: unset;
     font-size: 16px;
     border: 2px solid rgb(169, 169, 169);
@@ -83,15 +83,16 @@ H1 {
     background-size: 12px 12px;
 }
 
-#filter-form button{
+#filter-form button {
     border: none;
     cursor: pointer;
-    background-color: rgb(27, 27, 27);
-    color: rgb(169, 169, 169);
+    background-color: #77F1BE;
+    color: black;
     font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
     width: auto;
-    font-style: italic;
-    text-decoration: underline;
+    font-family: "Inter", sans-serif;
 }
 
 #cart-info {
@@ -110,11 +111,12 @@ H1 {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    text-decoration: none; /* Supprime le soulignement */
+    text-decoration: none;
+    /* Supprime le soulignement */
     color: inherit;
     width: 100%;
     height: 100%;
-    gap : 10px;
+    gap: 10px;
 }
 
 #cart-info button img {
@@ -126,7 +128,7 @@ H1 {
     font-size: 2.5em;
 }
 
-#message-reduc{
+#message-reduc {
     color: rgb(169, 169, 169);
     font-size: 1em;
     margin-bottom: 13px;
@@ -180,7 +182,8 @@ H1 {
 #one-product h3 {
     font-size: 1.6em;
     text-align: center;
-    white-space: wrap; /*white-space: nowrap;*/
+    white-space: wrap;
+    /*white-space: nowrap;*/
     overflow: hidden;
     /*text-overflow: ellipsis; /* Ajoute les "..." */
     word-wrap: break-word;
@@ -188,14 +191,14 @@ H1 {
     margin-bottom: 30px;
 }
 
-#one-product div:first-of-type p:first-of-type{
+#one-product div:first-of-type p:first-of-type {
     word-wrap: break-word;
     margin-top: auto;
     margin-bottom: 20px;
     font-size: 1.4em;
     color: white;
     align-self: center;
-    
+
 }
 
 #one-product div:first-of-type p:nth-of-type(2) {
@@ -204,16 +207,16 @@ H1 {
     font-size: 1.2em;
     color: rgb(169, 169, 169);
     align-self: center;
-    
+
 }
 
-#one-product div:first-of-type p:nth-of-type(2) span{
+#one-product div:first-of-type p:nth-of-type(2) span {
     color: rgb(169, 169, 169);
 }
 
 
 
-#stock-status{
+#stock-status {
     font-size: 1.2em;
     margin-top: 10px;
 }
@@ -245,6 +248,6 @@ H1 {
     width: 100%;
     box-sizing: border-box;
     border: none;
-    cursor:initial;
+    cursor: initial;
     font-size: 1em;
 }
