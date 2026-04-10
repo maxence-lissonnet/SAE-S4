@@ -62,7 +62,6 @@ switch ($page) {
         break;
 
     case 'add_cart':
-        require_once __DIR__ . "/Controller/BoutiqueController.php";
         require_once __DIR__ . "/Controller/add_Cart.php";
         break;
 

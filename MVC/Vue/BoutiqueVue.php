@@ -5,6 +5,12 @@
 
 <body class="body_margin">
     <?php require_once __DIR__ . '/../Controller/HeaderController.php'; ?>
+    <div
+        id="cart-toast"
+        aria-live="polite"
+        aria-atomic="true"
+        style="display:none; position:fixed; top:118px; right:32px; max-width:420px; min-width:240px; padding:12px 16px; border-radius:12px; background-color:rgba(64, 180, 141, 0.2); border:1px solid rgba(64, 180, 141, 0.8); color:rgb(182, 248, 224); font-weight:600; font-size:0.95rem; line-height:1.5; text-align:left; opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease; z-index:1201;"
+    ></div>
 
     <h1>LA BOUTIQUE</h1>
 
@@ -58,21 +64,27 @@
                                 <span>*</span>
                             <?php endif; ?>
                         </p>
+                        <?php if ($product['is_available'] && !empty($product['stock_label'])): ?>
+                            <p class="stock-label available" style="font-size: 0.68em; text-align: center; width: 100%; display: block; line-height: 1.2; margin: 10px auto 12px;">
+                                <?= htmlspecialchars($product['stock_label']) ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
 
-                    <?php if ($product['stock_article'] != 0): ?>
+                    <?php if ($product['is_available']): ?>
                         <a class="addCart" id="add-to-cart-button" href="index.php?page=add_cart&id=<?= $product['id_article'] ?>">Ajouter au panier</a>
                     <?php else: ?>
-                        <button disabled>Épuisé</button>
+                        <button id="out-of-stock" disabled>&Eacute;puis&eacute;</button>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <p>Aucun produit trouvé.</p>
+            <p>Aucun produit trouv&eacute;.</p>
         <?php endif; ?>
     </div>
 
     <?php require_once __DIR__ . '/../Controller/FooterController.php'; ?>
+    <script src="Asset/Script/add_cart.js"></script>
 </body>
 
 </html>

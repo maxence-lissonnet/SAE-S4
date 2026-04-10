@@ -306,7 +306,7 @@ H2 {
 /*** ---> Déconnexion***/
 
 #buttons-section form:first-of-type button {
-    width: 18vh;
+    width: 20vh;
     height: 6vh;
     background-color: rgb(119, 241, 190);
     color: #1E1E1E;
@@ -320,7 +320,7 @@ H2 {
 /*** ---> Supprimer mon compte***/
 
 #buttons-section form:nth-of-type(2) button {
-    width: 23vh;
+    width: 35vh;
     height: 6vh;
     background-color: rgb(234, 91, 91);
     color: white;
